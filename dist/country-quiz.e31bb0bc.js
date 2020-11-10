@@ -29790,7 +29790,7 @@ function Header() {
 
 var _default = Header;
 exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"Components/Form.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js"}],"useQuiz.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29798,43 +29798,77 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireDefault(require("react"));
+var _react = require("react");
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function useQuiz() {
+  const [quizes, setQuizes] = (0, _react.useState)([]);
+  const [randomCountry, setRandomCountry] = (0, _react.useState)({});
+  const [randomOptions, setRandomOptions] = (0, _react.useState)([]);
+  const [isCorrect, setIsCorrect] = (0, _react.useState)('');
+  const [score, setScore] = (0, _react.useState)(0);
+  const [bgColor, setBgColor] = (0, _react.useState)({
+    backgroundColor: 'white'
+  });
+  const [isDisabledFieldset, setIsDisabledFieldset] = (0, _react.useState)(false);
 
-function Form() {
-  return /*#__PURE__*/_react.default.createElement("form", {
-    className: "form"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "inputGroup",
-    role: "radiogroup"
-  }, /*#__PURE__*/_react.default.createElement("label", {
-    id: "label",
-    htmlFor: "radioTrue",
-    className: "container"
-  }, /*#__PURE__*/_react.default.createElement("input", {
-    id: "radioTrue",
-    name: "radio",
-    type: "radio"
-  }), "True", /*#__PURE__*/_react.default.createElement("span", {
-    className: "checkmark"
-  }))), /*#__PURE__*/_react.default.createElement("div", {
-    className: "inputGroup",
-    role: "radiogroup"
-  }, /*#__PURE__*/_react.default.createElement("label", {
-    id: "label",
-    htmlFor: "radioFalse",
-    className: "container"
-  }, /*#__PURE__*/_react.default.createElement("input", {
-    id: "radioFalse",
-    name: "radio",
-    type: "radio"
-  }), "False", /*#__PURE__*/_react.default.createElement("span", {
-    className: "checkmark"
-  }))));
+  async function getQuizes() {
+    const endpoint = "https:restcountries.eu/rest/v2/all";
+    const res = await fetch(endpoint);
+    const data = await res.json();
+    setQuizes(data);
+  }
+
+  (0, _react.useEffect)(() => {
+    getQuizes();
+  }, []);
+
+  function getRandomCountry() {
+    const random = quizes[Math.floor(Math.random() * quizes.length)];
+    const randomOpt1 = quizes[Math.floor(Math.random() * quizes.length)];
+    const randomOpt2 = quizes[Math.floor(Math.random() * quizes.length)];
+    const randomOpt3 = quizes[Math.floor(Math.random() * quizes.length)];
+    const randomOptions = [random.name, randomOpt1.name, randomOpt2.name, randomOpt3.name];
+    randomOptions.sort(() => {
+      return 0.5 - Math.random();
+    });
+    setRandomCountry(random);
+    setRandomOptions(randomOptions);
+    setIsCorrect('');
+    setIsDisabledFieldset(false);
+  }
+
+  function checkAnswer(e) {
+    setIsDisabledFieldset(true);
+    const winCountry = randomCountry.name;
+    const userGuess = e.target.value;
+
+    if (winCountry === userGuess) {
+      setIsCorrect('win');
+      setScore(prev => prev + 1);
+      setBgColor({
+        backgroundColor: '#81C784'
+      });
+    } else {
+      setIsCorrect('Lose');
+      setBgColor({
+        backgroundColor: '#FF8A65'
+      });
+    }
+
+    setTimeout(() => {
+      getRandomCountry();
+      setIsCorrect('');
+      setIsDisabledFieldset(false);
+      setBgColor({
+        backgroundColor: 'white'
+      });
+    }, 2000);
+  }
+
+  return [randomOptions, randomCountry, isDisabledFieldset, bgColor, score, isCorrect, getRandomCountry, checkAnswer];
 }
 
-var _default = Form;
+var _default = useQuiz;
 exports.default = _default;
 },{"react":"node_modules/react/index.js"}],"Components/Capital.js":[function(require,module,exports) {
 "use strict";
@@ -29844,37 +29878,49 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
-var _Form = _interopRequireDefault(require("./Form"));
+var _useQuiz = _interopRequireDefault(require("../useQuiz"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
 function Capital() {
-  const [quizes, setQuizes] = (0, _react.useState)([]);
-
-  async function getQuiz() {
-    const res = await fetch('https://restcountries.eu/rest/v2/capital/tallinn');
-    const data = await res.json();
-    setQuizes(data);
-    console.log(data);
-  }
-
-  (0, _react.useEffect)(() => {
-    getQuiz();
-  }, []);
-  return /*#__PURE__*/_react.default.createElement("div", null, quizes.map(quiz => /*#__PURE__*/_react.default.createElement("div", {
-    key: quiz.capital
-  }, /*#__PURE__*/_react.default.createElement("h2", null, quiz.capital, " is capital of"))), /*#__PURE__*/_react.default.createElement(_Form.default, null));
+  const [randomOptions, randomCountry, isDisabledFieldset, bgColor, score, isCorrect, getRandomCountry, checkAnswer] = (0, _useQuiz.default)();
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "capitalComponent"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "wrapper"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "img-container"
+  }, /*#__PURE__*/_react.default.createElement("h2", null, randomCountry.capital, " is the capital of"))), /*#__PURE__*/_react.default.createElement("fieldset", {
+    disabled: isDisabledFieldset
+  }, /*#__PURE__*/_react.default.createElement("form", {
+    onClick: e => checkAnswer(e)
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    style: bgColor,
+    className: "mui-btn mui-btn--raised",
+    value: randomOptions[0]
+  }, randomOptions[0]), /*#__PURE__*/_react.default.createElement("button", {
+    style: bgColor,
+    className: "mui-btn mui-btn--raised",
+    value: randomOptions[1]
+  }, randomOptions[1]), /*#__PURE__*/_react.default.createElement("button", {
+    style: bgColor,
+    className: "mui-btn mui-btn--raised",
+    value: randomOptions[2]
+  }, randomOptions[2]), /*#__PURE__*/_react.default.createElement("button", {
+    style: bgColor,
+    className: "mui-btn mui-btn--raised",
+    value: randomOptions[3]
+  }, randomOptions[3]))), /*#__PURE__*/_react.default.createElement("button", {
+    className: "rnd mui-btn mui-btn--raised",
+    onClick: getRandomCountry
+  }, "Next"));
 }
 
 var _default = Capital;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./Form":"Components/Form.js"}],"Components/FlagQuiz.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../useQuiz":"useQuiz.js"}],"Components/FlagQuiz.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29882,35 +29928,54 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+var _useQuiz = _interopRequireDefault(require("../useQuiz"));
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function FlagQuiz() {
-  const [quizes, setQuizes] = (0, _react.useState)([]);
-
-  async function getQuiz() {
-    const res = await fetch('https://restcountries.eu/rest/v2/capital/tallinn');
-    const data = await res.json();
-    setQuizes(data);
-    console.log(data);
-  }
-
-  (0, _react.useEffect)(() => {
-    getQuiz();
-  }, []);
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("h2", null, "Which country does this flag belong to ?"), quizes.map(quiz => /*#__PURE__*/_react.default.createElement("div", {
-    key: quiz.name
+// console.log(countries.randomOptions);
+function Country() {
+  const [randomOptions, randomCountry, isDisabledFieldset, bgColor, score, isCorrect, getRandomCountry, checkAnswer] = (0, _useQuiz.default)();
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "flagComponent"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "wrapper"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "img-container"
   }, /*#__PURE__*/_react.default.createElement("img", {
-    src: quiz.flag
-  }))));
+    className: "mui-panel",
+    src: randomCountry.flag,
+    alt: "Country flag"
+  }), /*#__PURE__*/_react.default.createElement("h2", null, "Which country does this flag belong to?"))), /*#__PURE__*/_react.default.createElement("fieldset", {
+    disabled: isDisabledFieldset
+  }, /*#__PURE__*/_react.default.createElement("form", {
+    onClick: e => checkAnswer(e)
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    style: bgColor,
+    className: "mui-btn mui-btn--raised",
+    value: randomOptions
+  }, randomOptions[0]), /*#__PURE__*/_react.default.createElement("button", {
+    style: bgColor,
+    className: "mui-btn mui-btn--raised",
+    value: randomOptions[1]
+  }, randomOptions[1]), /*#__PURE__*/_react.default.createElement("button", {
+    style: bgColor,
+    className: "mui-btn mui-btn--raised",
+    value: randomOptions[2]
+  }, randomOptions[2]), /*#__PURE__*/_react.default.createElement("button", {
+    style: bgColor,
+    className: "mui-btn mui-btn--raised",
+    value: randomOptions[3]
+  }, randomOptions[3]))), /*#__PURE__*/_react.default.createElement("button", {
+    className: "rnd mui-btn mui-btn--raised",
+    onClick: getRandomCountry
+  }, "Next"));
 }
 
-var _default = FlagQuiz;
+var _default = Country;
 exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"Components/Main.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../useQuiz":"useQuiz.js"}],"Components/Main.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29927,12 +29992,105 @@ var _FlagQuiz = _interopRequireDefault(require("./FlagQuiz"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Main() {
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_Capital.default, null), /*#__PURE__*/_react.default.createElement(_FlagQuiz.default, null));
+  return /*#__PURE__*/_react.default.createElement("main", null, /*#__PURE__*/_react.default.createElement(_Capital.default, null), /*#__PURE__*/_react.default.createElement(_FlagQuiz.default, null));
 }
 
 var _default = Main;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./Capital":"Components/Capital.js","./FlagQuiz":"Components/FlagQuiz.js"}],"pages/App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./Capital":"Components/Capital.js","./FlagQuiz":"Components/FlagQuiz.js"}],"Components/Country.js":[function(require,module,exports) {
+// import React, {Component} from 'react';
+// // import './Country.css';
+// class Country extends Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             countries: [],
+//             randomCountry: {},
+//             randomOptions: [],
+//             userIsWin: '',
+//             disableFieldset: false,
+//             goodGuess: 0,
+//             bgColor: {backgroundColor: 'white'}
+//         }
+//         this.getRandomCountry = this.getRandomCountry.bind(this);
+//         this.checkWin = this.checkWin.bind(this);
+//     }
+// componentDidMount() {
+//     const apiUrl = "https://restcountries.eu/rest/v2/all" ;
+//     fetch(apiUrl)
+//     .then(data => data.json())
+//     .then(countries => this.setState({countries}))
+//     .then(this.getRandomCountry)
+// }
+// getRandomCountry() {
+//     const random = this.state.countries[Math.floor(Math.random()*this.state.countries.length)];
+//     const randomOpt1 = this.state.countries[Math.floor(Math.random()*this.state.countries.length)];
+//     const randomOpt2 = this.state.countries[Math.floor(Math.random()*this.state.countries.length)];
+//     const randomOpt3 = this.state.countries[Math.floor(Math.random()*this.state.countries.length)];
+//     const randomOptions = [random.name, randomOpt1.name, randomOpt2.name, randomOpt3.name];
+//     randomOptions.sort(() => { return 0.5 - Math.random() });
+//     this.setState({
+//         randomCountry: random,
+//         randomOptions: randomOptions,
+//         userIsWin: '',
+//         disableFieldset: false
+//     })
+// }
+// checkWin(e) {
+//     this.setState({
+//         disableFieldset: true
+//     })
+//     const winCountry = this.state.randomCountry.name;
+//     const userGuess = e.target.value;
+//     if (winCountry === userGuess) {
+//         this.setState({
+//             userIsWin: 'Win',
+//             goodGuess: this.state.goodGuess + 1,
+//             bgColor: {backgroundColor: '#81C784'}
+//         })
+//     } else {
+//         this.setState({
+//             userIsWin: 'Lose',
+//             bgColor: {backgroundColor: '#FF8A65'}
+//         })
+//     }
+//     setTimeout(()=>{
+//         this.getRandomCountry();
+//         this.setState({
+//             userIsWin: '',
+//             disableFieldset: false,
+//             bgColor: {backgroundColor: 'white'}
+//         })
+//         console.log(e.target)
+//     }, 2000)
+// }
+// render() {
+//     return (
+//         <div className="main" style={this.state.bgColor}>
+//             <div className="wrapper">
+//                 <h1>Country Guessing Game</h1>
+//                 <button className="rnd mui-btn mui-btn--raised" onClick={this.getRandomCountry}>Random</button>
+//                 <div className="img-container">
+//                     <img className="mui-panel" src={this.state.randomCountry.flag} alt="Country flag" />
+//                 </div>
+//                 <h2>{this.state.userIsWin === 'Win' ? 'You guess right! ' : ''}
+//                     {this.state.userIsWin === 'Lose' ? 'You guess wrong. ' : ''}
+//                     Score:{this.state.goodGuess}</h2>
+//             </div>
+//             <fieldset disabled={this.state.disableFieldset}>
+//                 <form onClick={e => this.checkWin(e)}>
+//                     <button className="mui-btn mui-btn--raised" value={this.state.randomOptions[0]}>{this.state.randomOptions[0]}</button>
+//                     <button className="mui-btn mui-btn--raised" value={this.state.randomOptions[1]}>{this.state.randomOptions[1]}</button>
+//                     <button className="mui-btn mui-btn--raised" value={this.state.randomOptions[2]}>{this.state.randomOptions[2]}</button>
+//                     <button className="mui-btn mui-btn--raised" value={this.state.randomOptions[3]}>{this.state.randomOptions[3]}</button>
+//                 </form>
+//             </fieldset>
+//         </div>
+//       )
+//     }
+//     }
+//     export default Country;
+},{}],"pages/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29946,6 +30104,8 @@ var _Header = _interopRequireDefault(require("../components/Header"));
 
 var _Main = _interopRequireDefault(require("../Components/Main"));
 
+var _Country = _interopRequireDefault(require("../Components/Country"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function App() {
@@ -29954,7 +30114,7 @@ function App() {
 
 var _default = App;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../components/Header":"components/Header.js","../Components/Main":"Components/Main.js"}],"index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../components/Header":"components/Header.js","../Components/Main":"Components/Main.js","../Components/Country":"Components/Country.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -29994,7 +30154,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52625" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60264" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

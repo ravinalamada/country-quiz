@@ -4,10 +4,10 @@ import FlagQuiz from './FlagQuiz'
 
 function Main() {
   return (
-    <>
+    <main>
       <Capital />
       <FlagQuiz />
-    </>
+    </main>
   )
 }
 

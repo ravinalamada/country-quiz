@@ -1,12 +1,14 @@
 import React from "react"
 import Header from "../components/Header"
-import Main from "../Components/Main"
+import Main from "../Components/Main";
+import Country from '../Components/Country'
 
 function App() {
     return (
         <div>
-            <Header />
-            <Main />
+          <Header />
+          <Main />
+          {/* <Country /> */}
         </div>
     )
 }

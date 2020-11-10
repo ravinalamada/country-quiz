@@ -1,31 +1,37 @@
-import React, {useState, useEffect} from 'react';
-import Form from './Form';
+import React from 'react';
+import useQuiz from '../useQuiz';
 
 function Capital() {
-  const [quizes, setQuizes] = useState([]);
 
-  async function getQuiz() {
-    const res = await fetch('https://restcountries.eu/rest/v2/capital/tallinn');
-    const data = await res.json();
-    setQuizes(data)
-    console.log(data);
-  }
-
-  useEffect(() => {
-    getQuiz()
-  }, []);
+  const [randomOptions,
+    randomCountry,
+    isDisabledFieldset,
+    bgColor,
+    score,
+    isCorrect,
+    getRandomCountry,
+    checkAnswer
+   ] = useQuiz()
 
   return (
-    <div>
-      {quizes.map(quiz => (
-        <div key={quiz.capital}>
-          <h2>{quiz.capital} is capital of</h2>
+    <div className="capitalComponent">
+        <div className="wrapper">
+            <div className="img-container">
+            <h2>{randomCountry.capital} is the capital of</h2>
+            </div>
         </div>
-      ))}
-      <Form />
+        <fieldset disabled={isDisabledFieldset}>
+            <form onClick={e => checkAnswer(e)}>
+                <button style={bgColor} className="mui-btn mui-btn--raised" value={randomOptions[0]}>{randomOptions[0]}</button>
+                <button style={bgColor} className="mui-btn mui-btn--raised" value={randomOptions[1]}>{randomOptions[1]}</button>
+                <button style={bgColor} className="mui-btn mui-btn--raised" value={randomOptions[2]}>{randomOptions[2]}</button>
+                <button style={bgColor} className="mui-btn mui-btn--raised" value={randomOptions[3]}>{randomOptions[3]}</button>
+            </form>
+        </fieldset>
+        <button className="rnd mui-btn mui-btn--raised" onClick={getRandomCountry}>Next</button>
     </div>
-
   )
+
 }
 
 export default Capital;
