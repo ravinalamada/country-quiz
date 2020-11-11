@@ -1,38 +1,51 @@
-// console.log(countries.randomOptions);
- import React from 'react';
- import useQuiz from '../useQuiz';
+import React from 'react';
+import {Link} from 'react-router-dom';
+import useQuiz from '../useQuiz';
 
- function Country () {
+function FlagQuiz() {
 
-const [randomOptions,
-       randomCountry,
-       isDisabledFieldset,
-       bgColor,
-       score,
-       isCorrect,
-       getRandomCountry,
-       checkAnswer
-      ] = useQuiz()
+  const [randomOptions,
+         randomCountry,
+         isDisabledFieldset,
+         bgColor,
+         score,
+         isCorrect,
+         isLoading,
+         getRandomCountry,
+         checkAnswer,
+         checkLoading]=useQuiz()
 
- return (
-      <div className="flagComponent">
-          <div className="wrapper">
-              <div className="img-container">
-                  <img className="mui-panel" src={randomCountry.flag} alt="Country flag" />
-                  <h2>Which country does this flag belong to?</h2>
+  return (
+      <>
+        <button onClick={checkLoading}>Loading...</button>
+        {isLoading
+         ?
+            <div className="capitalComponent">
+              <div className="wrapper">
+                <img src={randomCountry.flag} alt="flag"></img>
+                 <h2>Which country does this flag belong to?</h2>
               </div>
-          </div>
-          <fieldset disabled={isDisabledFieldset}>
-              <form onClick={e => checkAnswer(e)}>
-                  <button style={bgColor} className="mui-btn mui-btn--raised" value={randomOptions}>{randomOptions[0]}</button>
-                  <button style={bgColor} className="mui-btn mui-btn--raised" value={randomOptions[1]}>{randomOptions[1]}</button>
-                  <button style={bgColor} className="mui-btn mui-btn--raised" value={randomOptions[2]}>{randomOptions[2]}</button>
-                  <button style={bgColor} className="mui-btn mui-btn--raised" value={randomOptions[3]}>{randomOptions[3]}</button>
-              </form>
-          </fieldset>
-          <button className="rnd mui-btn mui-btn--raised" onClick={getRandomCountry}>Next</button>
-      </div>
+              <fieldset disabled={isDisabledFieldset}>
+                <form>
+                  {randomOptions.map(quiz => (
+                    <button
+                      key={quiz.length}
+                      onClick={checkAnswer}
+                      style={bgColor}
+                      value={quiz}
+                      className="bg"
+                      >{quiz}</button>
+                  ))}
+                </form>
+              </fieldset>
+            </div>
+         : null
+        }
+
+        {/* <button className="rnd mui-btn mui-btn--raised" onClick={getRandomCountry}>Next</button> */}
+    </>
   )
+
 }
 
-  export default Country;
+export default FlagQuiz;

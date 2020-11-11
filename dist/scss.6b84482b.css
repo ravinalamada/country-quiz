@@ -31,7 +31,7 @@ main {
 }
 
 fieldset,
-.rnd {
+.bg {
   border-color: transparent;
 }
 
@@ -54,6 +54,14 @@ form button {
 button {
   padding-top: 14px;
   padding-bottom: 15px;
+}
+
+.greenBg {
+  background-color: "#81C784";
+}
+
+.redBg {
+  background-color: "#FF8A65";
 }
 
 .rnd {

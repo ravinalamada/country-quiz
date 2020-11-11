@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import Capital from './Capital';
-import FlagQuiz from './FlagQuiz'
+import FlagQuiz from './FlagQuiz';
 
 function Main() {
   return (

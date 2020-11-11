@@ -6,8 +6,9 @@ function useQuiz() {
     const [randomOptions, setRandomOptions] = useState([]);
     const [isCorrect, setIsCorrect] = useState('');
     const [score, setScore] = useState(0)
-    const [bgColor, setBgColor] = useState({backgroundColor: 'white'});
+    const [bgColor, setBgColor] = useState({backgroundColor: ''});
     const [isDisabledFieldset, setIsDisabledFieldset] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     async function getQuizes() {
       const endpoint = "https:restcountries.eu/rest/v2/all" ;
@@ -34,27 +35,32 @@ function useQuiz() {
   }
 
   function checkAnswer(e) {
-      setIsDisabledFieldset(true)
-      const winCountry = randomCountry.name;
-      const userGuess = e.target.value;
-      if (winCountry === userGuess) {
-          setIsCorrect('win')
+      setIsDisabledFieldset(true);
+      const countryName = randomCountry.name;
+      const countryValue = e.target.value;
+      if (countryName === countryValue) {
           setScore((prev) => prev + 1)
           setBgColor({backgroundColor: '#81C784'})
-      } else {
-       setIsCorrect('Lose')
+      } else if(!countryName === countryValue) {
        setBgColor({backgroundColor: '#FF8A65'})
       }
+      //   setBgColor({backgroundColor: ''})
+      // }
       setTimeout(()=>{
-          getRandomCountry();
           setIsCorrect('')
           setIsDisabledFieldset(false)
-          setBgColor({backgroundColor: 'white'})
+          setBgColor({backgroundColor: 'white'});
+          getRandomCountry();
       }, 2000)
 
   }
 
-  return [randomOptions, randomCountry, isDisabledFieldset, bgColor, score, isCorrect, getRandomCountry, checkAnswer]
+  function checkLoading() {
+    setIsLoading(!isLoading);
+    getRandomCountry();
+  }
+
+  return [randomOptions, randomCountry, isDisabledFieldset, bgColor, score, isCorrect, isLoading, getRandomCountry, checkAnswer, checkLoading]
 
 }
 
