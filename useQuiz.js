@@ -16,12 +16,9 @@ function useQuiz() {
     const res = await fetch(endpoint);
     const data = await res.json();
 
-
-
     // I randomised the country data that I have fetched
     const randomQuizes = data[Math.floor(Math.random() * data.length)];
     const randomQuestion = quizQuestions[Math.floor(Math.random() * quizQuestions.length)]
-    // console.log(randomQuestion );
     const randomOpt1 = data[Math.floor(Math.random() * data.length)];
     const randomOpt2 = data[Math.floor(Math.random() * data.length)];
     const randomOpt3 = data[Math.floor(Math.random() * data.length)];
@@ -36,8 +33,6 @@ function useQuiz() {
       correctAnswers: randomQuizes.name,
       images: randomQuizes.flag,
       capital: randomQuizes.capital,
-      userANswer: '',
-      isCorrect: false,
     }
     setQuizes([quizObject]);
   }
@@ -52,7 +47,6 @@ function useQuiz() {
   // This is function that will toggle the background and increase the score when the it's true
   function handleClick(e) {
     const btnValue = e.target;
-    console.log(btnValue);
 
     // check if the button value is the same as the country name
     if (btnValue.id === findCountryName.correctAnswers) {

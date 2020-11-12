@@ -33946,8 +33946,7 @@ function useQuiz() {
 
     const randomQuizes = data[Math.floor(Math.random() * data.length)];
 
-    const randomQuestion = _Questions.default[Math.floor(Math.random() * _Questions.default.length)]; // console.log(randomQuestion );
-
+    const randomQuestion = _Questions.default[Math.floor(Math.random() * _Questions.default.length)];
 
     const randomOpt1 = data[Math.floor(Math.random() * data.length)];
     const randomOpt2 = data[Math.floor(Math.random() * data.length)];
@@ -33963,9 +33962,7 @@ function useQuiz() {
       answers: sortedQuizOptions,
       correctAnswers: randomQuizes.name,
       images: randomQuizes.flag,
-      capital: randomQuizes.capital,
-      userANswer: '',
-      isCorrect: false
+      capital: randomQuizes.capital
     };
     setQuizes([quizObject]);
   }
@@ -33977,8 +33974,7 @@ function useQuiz() {
   const findCountryName = quizes.find(quiz => quiz.correctAnswers); // This is function that will toggle the background and increase the score when the it's true
 
   function handleClick(e) {
-    const btnValue = e.target;
-    console.log(btnValue); // check if the button value is the same as the country name
+    const btnValue = e.target; // check if the button value is the same as the country name
 
     if (btnValue.id === findCountryName.correctAnswers) {
       btnValue.style.backgroundColor = 'green';
@@ -34156,7 +34152,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51502" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51784" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
