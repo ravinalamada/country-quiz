@@ -33972,9 +33972,9 @@ function useQuiz() {
 
   (0, _react.useEffect)(() => {
     getcountries();
-  }, []);
-  const findCountryName = quizes.find(quiz => quiz.correctAnswers);
-  console.log(findCountryName); // This is function that will toggle the background and increase the score when the it's true
+  }, []); // I find the correct answer that I am going to compare with the button id
+
+  const findCountryName = quizes.find(quiz => quiz.correctAnswers); // This is function that will toggle the background and increase the score when the it's true
 
   function handleClick(e) {
     const btnValue = e.target;
@@ -34156,7 +34156,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51472" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51502" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
