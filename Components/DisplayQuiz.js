@@ -12,21 +12,21 @@ function DisplayQuiz() {
           handleClick,
           checkLoading] = useQuiz()
 
-  const mappedQuestion = quizes.map(quiz => quiz.question);
-  const q1 = mappedQuestion.question2;
+  // I mapped the
+  const mappedQuestion = quizes.find(quiz => quiz.question.question1);
   return (
             <div className="capitalComponent">
               <div className="wrapper">
-                { mappedQuestion === 'Which country does this flag belong to ?'
+                {mappedQuestion
                 ? quizes.map(quiz => (
                   <div key={quiz.images}>
-                    <img src={quiz.images} alt="Flag"/>
-                    <h2>Which country does this flag belong to ?</h2>
+                    <h2>{quiz.capital} is the capital of</h2>
                   </div>
                   ))
                 : quizes.map(quiz => (
                   <div key={quiz.images}>
-                    <h2>{quiz.capital} is the capital of</h2>
+                    <img src={quiz.images} alt="Flag"/>
+                    <h2>Which country does this flag belong to ?</h2>
                   </div>
                   ))
                 }
@@ -36,17 +36,17 @@ function DisplayQuiz() {
                     <form key={quiz}>
                       <button
                         onClick={handleClick}
-                        value={quiz}
+                        id={quiz.answers[0]}
                       >{quiz.answers[0]}</button>
                       <button
-                        onClick={handleClick}
-                        value={quiz}
+                        onClick={(e) => handleClick(e)}
+                        id={quiz.answers[1]}
                       >{quiz.answers[1]}</button><button
-                        onClick={handleClick}
-                        value={quiz}
+                        onClick={(e) => handleClick(e)}
+                        id={quiz.answers[2]}
                       >{quiz.answers[2]}</button><button
-                        onClick={handleClick}
-                        value={quiz}
+                        onClick={(e) => handleClick(e)}
+                        id={quiz.answers[3]}
                       >{quiz.answers[3]}</button>
                     </form>
                   ))}

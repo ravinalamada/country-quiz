@@ -33892,153 +33892,7 @@ const Questions = [{
 }];
 var _default = Questions;
 exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"useQuiz.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = require("react");
-
-var _Questions = _interopRequireDefault(require("./Components/Questions"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function useQuiz() {
-  // I initialise the varibles
-  const [quizes, setQuizes] = (0, _react.useState)([]);
-  const [score, setScore] = (0, _react.useState)(0);
-  const [isLoading, setIsLoading] = (0, _react.useState)(false);
-  const [showNextPage, setShowNextPage] = (0, _react.useState)(false); // Fetch the countries
-
-  async function getcountries() {
-    const endpoint = "https:restcountries.eu/rest/v2/all";
-    const res = await fetch(endpoint);
-    const data = await res.json(); // I randomised the country data that I have fetched
-
-    const randomQuizes = data[Math.floor(Math.random() * data.length)];
-
-    const randomQuestion = _Questions.default[Math.floor(Math.random() * _Questions.default.length)];
-
-    const randomOpt1 = data[Math.floor(Math.random() * data.length)];
-    const randomOpt2 = data[Math.floor(Math.random() * data.length)];
-    const randomOpt3 = data[Math.floor(Math.random() * data.length)];
-    const randomOptions = [randomQuizes.name, randomOpt1.name, randomOpt2.name, randomOpt3.name];
-    const sortedQuizOptions = randomOptions.sort(() => {
-      return 0.5 - Math.random();
-    }); // I initialed the variables thatI am going to push in my state
-
-    const quizObject = {
-      countries: randomQuizes,
-      question: randomQuestion,
-      answers: sortedQuizOptions,
-      correctAnswers: randomQuizes.name,
-      images: randomQuizes.flag,
-      capital: randomQuizes.capital,
-      userANswer: '',
-      isCorrect: false
-    };
-    setQuizes([quizObject]);
-  }
-
-  (0, _react.useEffect)(() => {
-    getcountries();
-  }, []); // This is function that will toggle the background and increase the score when the it's true
-
-  function handleClick(e) {
-    const btnValue = e.target;
-    const findCoutryName = quizes.find(quiz => quiz.correctAnswer);
-    console.log(findCoutryName); // check if the button value is the same as the country name
-
-    if (findCoutryName === btnValue) {
-      btnValue.style.backgroundColor = 'green';
-      setScore(prev => prev + 1);
-    } else if (findCoutryName !== btnValue) {
-      btnValue.style.backgroundColor = 'red';
-    }
-  } // Start the Quiz
-
-
-  function checkLoading() {
-    setIsLoading(!isLoading);
-  } // This function will display the next page
-
-
-  function HandleNextPage(e) {
-    const findAnswer = quizes.find(quiz => quiz.correctAnswer);
-
-    if (findAnswer == e.target.value) {
-      console.log('true');
-      setShowNextPage(true);
-    }
-  } // Return the variables and the function names that are needed
-
-
-  return [quizes, isLoading, score, showNextPage, HandleNextPage, handleClick, checkLoading];
-}
-
-var _default = useQuiz;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","./Components/Questions":"Components/Questions.js"}],"Components/DisplayQuiz.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _useQuiz = _interopRequireDefault(require("../useQuiz"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-// import quizQuestions from './Questions'
-function DisplayQuiz() {
-  const [quizes, isLoading, score, showNextPage, HandleNextPage, handleClick, checkLoading] = (0, _useQuiz.default)();
-  const mappedQuestion = quizes.map(quiz => quiz.question);
-  const q1 = mappedQuestion.question2;
-  return /*#__PURE__*/_react.default.createElement("div", {
-    className: "capitalComponent"
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    className: "wrapper"
-  }, mappedQuestion === 'Which country does this flag belong to ?' ? quizes.map(quiz => /*#__PURE__*/_react.default.createElement("div", {
-    key: quiz.images
-  }, /*#__PURE__*/_react.default.createElement("img", {
-    src: quiz.images,
-    alt: "Flag"
-  }), /*#__PURE__*/_react.default.createElement("h2", null, "Which country does this flag belong to ?"))) : quizes.map(quiz => /*#__PURE__*/_react.default.createElement("div", {
-    key: quiz.images
-  }, /*#__PURE__*/_react.default.createElement("h2", null, quiz.capital, " is the capital of")))), /*#__PURE__*/_react.default.createElement("fieldset", null, quizes.map(quiz => /*#__PURE__*/_react.default.createElement("form", {
-    key: quiz
-  }, /*#__PURE__*/_react.default.createElement("button", {
-    onClick: handleClick,
-    value: quiz
-  }, quiz.answers[0]), /*#__PURE__*/_react.default.createElement("button", {
-    onClick: handleClick,
-    value: quiz
-  }, quiz.answers[1]), /*#__PURE__*/_react.default.createElement("button", {
-    onClick: handleClick,
-    value: quiz
-  }, quiz.answers[2]), /*#__PURE__*/_react.default.createElement("button", {
-    onClick: handleClick,
-    value: quiz
-  }, quiz.answers[3])))), /*#__PURE__*/_react.default.createElement("button", {
-    className: `${quizes.answers ? 'showNextBtn' : 'hideNextBtn'} nextBtn`,
-    value: showNextPage,
-    onClick: HandleNextPage
-  }, "Next"));
-}
-
-var _default = DisplayQuiz;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","../useQuiz":"useQuiz.js"}],"Components/Result.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js"}],"Components/Result.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34062,6 +33916,158 @@ function Result() {
 
 var _default = Result;
 exports.default = _default;
+},{"react":"node_modules/react/index.js","../useQuiz":"useQuiz.js"}],"useQuiz.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = require("react");
+
+var _Questions = _interopRequireDefault(require("./Components/Questions"));
+
+var _Result = _interopRequireDefault(require("./Components/Result"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function useQuiz() {
+  // I initialise the varibles
+  const [quizes, setQuizes] = (0, _react.useState)([]);
+  const [score, setScore] = (0, _react.useState)(0);
+  const [isLoading, setIsLoading] = (0, _react.useState)(false);
+  const [showNextPage, setShowNextPage] = (0, _react.useState)(false); // Fetch the countries
+
+  async function getcountries() {
+    const endpoint = "https:restcountries.eu/rest/v2/all";
+    const res = await fetch(endpoint);
+    const data = await res.json(); // I randomised the country data that I have fetched
+
+    const randomQuizes = data[Math.floor(Math.random() * data.length)];
+
+    const randomQuestion = _Questions.default[Math.floor(Math.random() * _Questions.default.length)]; // console.log(randomQuestion );
+
+
+    const randomOpt1 = data[Math.floor(Math.random() * data.length)];
+    const randomOpt2 = data[Math.floor(Math.random() * data.length)];
+    const randomOpt3 = data[Math.floor(Math.random() * data.length)];
+    const randomOptions = [randomQuizes.name, randomOpt1.name, randomOpt2.name, randomOpt3.name];
+    const sortedQuizOptions = randomOptions.sort(() => {
+      return 0.5 - Math.random();
+    }); // I initialed the variables thatI am going to push in my state
+
+    const quizObject = {
+      countries: randomQuizes,
+      question: randomQuestion,
+      answers: sortedQuizOptions,
+      correctAnswers: randomQuizes.name,
+      images: randomQuizes.flag,
+      capital: randomQuizes.capital,
+      userANswer: '',
+      isCorrect: false
+    };
+    setQuizes([quizObject]);
+    console.log(quizes.correctAnswers);
+  }
+
+  (0, _react.useEffect)(() => {
+    getcountries();
+  }, []); // This is function that will toggle the background and increase the score when the it's true
+
+  function handleClick(e) {
+    const btnValue = e.target;
+    console.log(btnValue);
+    const findCountryName = quizes.find(quiz => quiz.correctAnswers); // check if the button value is the same as the country name
+
+    if (findCountryName === btnValue.id) {
+      btnValue.style.backgroundColor = 'green';
+      setScore(prev => prev + 1);
+      console.log('You win');
+    } else if (findCountryName !== btnValue.id) {
+      btnValue.style.backgroundColor = 'red';
+    }
+  } // Start the Quiz
+
+
+  function checkLoading() {
+    setIsLoading(!isLoading);
+  } // This function will display the next page
+
+
+  function HandleNextPage(e) {
+    const btn = e.target;
+    const findAnswer = quizes.find(quiz => quiz.correctAnswers);
+
+    if (findAnswer === btn.id) {
+      console.log('true');
+      getcountries();
+    }
+  } // Return the variables and the function names that are needed
+
+
+  return [quizes, isLoading, score, showNextPage, HandleNextPage, handleClick, checkLoading];
+}
+
+var _default = useQuiz;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","./Components/Questions":"Components/Questions.js","./Components/Result":"Components/Result.js"}],"Components/DisplayQuiz.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _useQuiz = _interopRequireDefault(require("../useQuiz"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+// import quizQuestions from './Questions'
+function DisplayQuiz() {
+  const [quizes, isLoading, score, showNextPage, HandleNextPage, handleClick, checkLoading] = (0, _useQuiz.default)(); // I mapped the
+
+  const mappedQuestion = quizes.find(quiz => quiz.question.question1);
+  return /*#__PURE__*/_react.default.createElement("div", {
+    className: "capitalComponent"
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "wrapper"
+  }, mappedQuestion ? quizes.map(quiz => /*#__PURE__*/_react.default.createElement("div", {
+    key: quiz.images
+  }, /*#__PURE__*/_react.default.createElement("h2", null, quiz.capital, " is the capital of"))) : quizes.map(quiz => /*#__PURE__*/_react.default.createElement("div", {
+    key: quiz.images
+  }, /*#__PURE__*/_react.default.createElement("img", {
+    src: quiz.images,
+    alt: "Flag"
+  }), /*#__PURE__*/_react.default.createElement("h2", null, "Which country does this flag belong to ?")))), /*#__PURE__*/_react.default.createElement("fieldset", null, quizes.map(quiz => /*#__PURE__*/_react.default.createElement("form", {
+    key: quiz
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    onClick: handleClick,
+    id: quiz.answers[0]
+  }, quiz.answers[0]), /*#__PURE__*/_react.default.createElement("button", {
+    onClick: e => handleClick(e),
+    id: quiz.answers[1]
+  }, quiz.answers[1]), /*#__PURE__*/_react.default.createElement("button", {
+    onClick: e => handleClick(e),
+    id: quiz.answers[2]
+  }, quiz.answers[2]), /*#__PURE__*/_react.default.createElement("button", {
+    onClick: e => handleClick(e),
+    id: quiz.answers[3]
+  }, quiz.answers[3])))), /*#__PURE__*/_react.default.createElement("button", {
+    className: `${quizes.answers ? 'showNextBtn' : 'hideNextBtn'} nextBtn`,
+    value: showNextPage,
+    onClick: HandleNextPage
+  }, "Next"));
+}
+
+var _default = DisplayQuiz;
+exports.default = _default;
 },{"react":"node_modules/react/index.js","../useQuiz":"useQuiz.js"}],"Components/Main.js":[function(require,module,exports) {
 "use strict";
 
@@ -34076,15 +34082,18 @@ var _DisplayQuiz = _interopRequireDefault(require("./DisplayQuiz"));
 
 var _Result = _interopRequireDefault(require("./Result"));
 
+var _useQuiz = _interopRequireDefault(require("../useQuiz"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Main() {
+  const [quizes, isLoading, score, showNextPage, HandleNextPage, handleClick, checkLoading] = (0, _useQuiz.default)();
   return /*#__PURE__*/_react.default.createElement("main", null, /*#__PURE__*/_react.default.createElement(_DisplayQuiz.default, null));
 }
 
 var _default = Main;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./DisplayQuiz":"Components/DisplayQuiz.js","./Result":"Components/Result.js"}],"pages/App.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./DisplayQuiz":"Components/DisplayQuiz.js","./Result":"Components/Result.js","../useQuiz":"useQuiz.js"}],"pages/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34148,7 +34157,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54635" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49324" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

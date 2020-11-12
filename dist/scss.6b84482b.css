@@ -80,4 +80,12 @@ button {
   display: none;
 }
 
+@media (min-width: 1000px) {
+  .capitalComponent {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 /*# sourceMappingURL=/scss.6b84482b.css.map */

@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
-import quizQuestions from './Components/Questions'
+import quizQuestions from './Components/Questions';
+import Result from './Components/Result'
 
 function useQuiz() {
 
@@ -15,9 +16,12 @@ function useQuiz() {
       const res = await fetch(endpoint);
       const data = await res.json();
 
+
+
   // I randomised the country data that I have fetched
       const randomQuizes = data[Math.floor(Math.random() * data.length)];
       const randomQuestion = quizQuestions[Math.floor(Math.random() * quizQuestions.length)]
+      // console.log(randomQuestion );
       const randomOpt1 = data[Math.floor(Math.random() * data.length)];
       const randomOpt2 = data[Math.floor(Math.random() * data.length)];
       const randomOpt3 = data[Math.floor(Math.random() * data.length)];
@@ -35,7 +39,8 @@ function useQuiz() {
         userANswer: '',
         isCorrect: false,
       }
-    setQuizes([quizObject])
+    setQuizes([quizObject]);
+  console.log(quizes.correctAnswers);
   }
 
   useEffect(() => {
@@ -45,14 +50,16 @@ function useQuiz() {
   // This is function that will toggle the background and increase the score when the it's true
   function handleClick(e) {
       const btnValue = e.target;
-      const findCoutryName = quizes.find(quiz => quiz.correctAnswer);
-      console.log(findCoutryName);
+      console.log(btnValue);
+      const findCountryName = quizes.find(quiz => quiz.correctAnswers);
+
       // check if the button value is the same as the country name
-      if (findCoutryName === btnValue) {
+      if (findCountryName === btnValue.id) {
           btnValue.style.backgroundColor = 'green';
           setScore((prev) => prev + 1)
+          console.log('You win');
 
-      } else if(findCoutryName !== btnValue) {
+      } else if(findCountryName !== btnValue.id) {
         btnValue.style.backgroundColor = 'red';
       }
   }
@@ -64,10 +71,11 @@ function useQuiz() {
 
   // This function will display the next page
   function HandleNextPage(e) {
-    const findAnswer = quizes.find(quiz => quiz.correctAnswer);
-        if (findAnswer == e.target.value) {
+    const btn = e.target;
+    const findAnswer = quizes.find(quiz => quiz.correctAnswers);
+        if (findAnswer === btn.id) {
             console.log('true');
-           setShowNextPage(true)
+          getcountries()
         }
     }
 
