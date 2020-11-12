@@ -1,12 +1,11 @@
 import React from 'react';
-import Capital from './Capital';
-import FlagQuiz from './FlagQuiz';
+import DisplayQuiz from './DisplayQuiz';
+import Result from './Result';
 
 function Main() {
   return (
     <main>
-      <Capital />
-      <FlagQuiz />
+      <DisplayQuiz />
     </main>
   )
 }

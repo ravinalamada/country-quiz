@@ -1,67 +1,84 @@
 import {useState, useEffect} from 'react';
+import quizQuestions from './Components/Questions'
 
 function useQuiz() {
-    const [quizes, setQuizes ] = useState([]);
-    const [randomCountry, setRandomCountry] = useState({});
-    const [randomOptions, setRandomOptions] = useState([]);
-    const [isCorrect, setIsCorrect] = useState('');
-    const [score, setScore] = useState(0)
-    const [bgColor, setBgColor] = useState({backgroundColor: ''});
-    const [isDisabledFieldset, setIsDisabledFieldset] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
 
-    async function getQuizes() {
+  // I initialise the varibles
+    const [quizes, setQuizes ] = useState([]);
+    const [score, setScore] = useState(0)
+    const [isLoading, setIsLoading] = useState(false);
+    const [showNextPage, setShowNextPage] = useState(false);
+
+    // Fetch the countries
+    async function getcountries() {
       const endpoint = "https:restcountries.eu/rest/v2/all" ;
       const res = await fetch(endpoint);
       const data = await res.json();
-      setQuizes(data);
+
+  // I randomised the country data that I have fetched
+      const randomQuizes = data[Math.floor(Math.random() * data.length)];
+      const randomQuestion = quizQuestions[Math.floor(Math.random() * quizQuestions.length)]
+      const randomOpt1 = data[Math.floor(Math.random() * data.length)];
+      const randomOpt2 = data[Math.floor(Math.random() * data.length)];
+      const randomOpt3 = data[Math.floor(Math.random() * data.length)];
+      const randomOptions = [randomQuizes.name, randomOpt1.name, randomOpt2.name, randomOpt3.name];
+      const sortedQuizOptions = randomOptions.sort(() => { return 0.5 - Math.random() });
+
+      // I initialed the variables thatI am going to push in my state
+      const quizObject = {
+        countries: randomQuizes,
+        question: randomQuestion,
+        answers: sortedQuizOptions,
+        correctAnswers: randomQuizes.name,
+        images: randomQuizes.flag,
+        capital: randomQuizes.capital,
+        userANswer: '',
+        isCorrect: false,
+      }
+    setQuizes([quizObject])
   }
 
   useEffect(() => {
-    getQuizes()
+    getcountries()
   }, [])
 
-  function getRandomCountry() {
-      const random = quizes[Math.floor(Math.random() * quizes.length)];
-      const randomOpt1 = quizes[Math.floor(Math.random() * quizes.length)];
-      const randomOpt2 = quizes[Math.floor(Math.random() * quizes.length)];
-      const randomOpt3 = quizes[Math.floor(Math.random() * quizes.length)];
-      const randomOptions = [random.name, randomOpt1.name, randomOpt2.name, randomOpt3.name];
-      randomOptions.sort(() => { return 0.5 - Math.random() });
-      setRandomCountry(random);
-      setRandomOptions(randomOptions)
-      setIsCorrect('')
-      setIsDisabledFieldset(false)
-  }
-
-  function checkAnswer(e) {
-      setIsDisabledFieldset(true);
-      const countryName = randomCountry.name;
-      const countryValue = e.target.value;
-      if (countryName === countryValue) {
+  // This is function that will toggle the background and increase the score when the it's true
+  function handleClick(e) {
+      const btnValue = e.target;
+      const findCoutryName = quizes.find(quiz => quiz.correctAnswer);
+      console.log(findCoutryName);
+      // check if the button value is the same as the country name
+      if (findCoutryName === btnValue) {
+          btnValue.style.backgroundColor = 'green';
           setScore((prev) => prev + 1)
-          setBgColor({backgroundColor: '#81C784'})
-      } else if(!countryName === countryValue) {
-       setBgColor({backgroundColor: '#FF8A65'})
-      }
-      //   setBgColor({backgroundColor: ''})
-      // }
-      setTimeout(()=>{
-          setIsCorrect('')
-          setIsDisabledFieldset(false)
-          setBgColor({backgroundColor: 'white'});
-          getRandomCountry();
-      }, 2000)
 
+      } else if(findCoutryName !== btnValue) {
+        btnValue.style.backgroundColor = 'red';
+      }
   }
 
+  // Start the Quiz
   function checkLoading() {
     setIsLoading(!isLoading);
-    getRandomCountry();
   }
 
-  return [randomOptions, randomCountry, isDisabledFieldset, bgColor, score, isCorrect, isLoading, getRandomCountry, checkAnswer, checkLoading]
+  // This function will display the next page
+  function HandleNextPage(e) {
+    const findAnswer = quizes.find(quiz => quiz.correctAnswer);
+        if (findAnswer == e.target.value) {
+            console.log('true');
+           setShowNextPage(true)
+        }
+    }
 
+  // Return the variables and the function names that are needed
+  return [quizes,
+          isLoading,
+          score,
+          showNextPage,
+          HandleNextPage,
+          handleClick,
+          checkLoading]
 }
 
 export default useQuiz;

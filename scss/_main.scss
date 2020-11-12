@@ -50,10 +50,18 @@ button {
   background-color: '#FF8A65'
 }
 
-.rnd {
+.nextBtn {
   background: #F9A826;
   box-shadow: 0px 2px 4px rgba(252, 168, 47, 0.4);
   border-radius: 12px;
   padding-left: 37px;
   padding-right: 37px;
+}
+
+.showNextBtn {
+  display: block;
+}
+
+.hideNextBtn {
+  display: none;
 }
