@@ -33968,23 +33968,22 @@ function useQuiz() {
       isCorrect: false
     };
     setQuizes([quizObject]);
-    console.log(quizes.correctAnswers);
   }
 
   (0, _react.useEffect)(() => {
     getcountries();
-  }, []); // This is function that will toggle the background and increase the score when the it's true
+  }, []);
+  const findCountryName = quizes.find(quiz => quiz.correctAnswers);
+  console.log(findCountryName); // This is function that will toggle the background and increase the score when the it's true
 
   function handleClick(e) {
     const btnValue = e.target;
-    console.log(btnValue);
-    const findCountryName = quizes.find(quiz => quiz.correctAnswers); // check if the button value is the same as the country name
+    console.log(btnValue); // check if the button value is the same as the country name
 
-    if (findCountryName === btnValue.id) {
+    if (btnValue.id === findCountryName.correctAnswers) {
       btnValue.style.backgroundColor = 'green';
       setScore(prev => prev + 1);
-      console.log('You win');
-    } else if (findCountryName !== btnValue.id) {
+    } else if (btnValue.id !== findCountryName.correctAnswers) {
       btnValue.style.backgroundColor = 'red';
     }
   } // Start the Quiz
@@ -34048,7 +34047,7 @@ function DisplayQuiz() {
   }), /*#__PURE__*/_react.default.createElement("h2", null, "Which country does this flag belong to ?")))), /*#__PURE__*/_react.default.createElement("fieldset", null, quizes.map(quiz => /*#__PURE__*/_react.default.createElement("form", {
     key: quiz
   }, /*#__PURE__*/_react.default.createElement("button", {
-    onClick: handleClick,
+    onClick: e => handleClick(e),
     id: quiz.answers[0]
   }, quiz.answers[0]), /*#__PURE__*/_react.default.createElement("button", {
     onClick: e => handleClick(e),
@@ -34157,7 +34156,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49324" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50387" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

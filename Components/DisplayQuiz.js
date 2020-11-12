@@ -35,16 +35,18 @@ function DisplayQuiz() {
                   {quizes.map(quiz => (
                     <form key={quiz}>
                       <button
-                        onClick={handleClick}
+                        onClick={(e) => handleClick(e)}
                         id={quiz.answers[0]}
                       >{quiz.answers[0]}</button>
                       <button
                         onClick={(e) => handleClick(e)}
                         id={quiz.answers[1]}
-                      >{quiz.answers[1]}</button><button
+                      >{quiz.answers[1]}</button>
+                      <button
                         onClick={(e) => handleClick(e)}
                         id={quiz.answers[2]}
-                      >{quiz.answers[2]}</button><button
+                      >{quiz.answers[2]}</button>
+                      <button
                         onClick={(e) => handleClick(e)}
                         id={quiz.answers[3]}
                       >{quiz.answers[3]}</button>

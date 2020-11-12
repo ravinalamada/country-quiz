@@ -40,27 +40,28 @@ function useQuiz() {
         isCorrect: false,
       }
     setQuizes([quizObject]);
-  console.log(quizes.correctAnswers);
   }
 
   useEffect(() => {
     getcountries()
   }, [])
 
+  const findCountryName = quizes.find(quiz => quiz.correctAnswers);
+ console.log(findCountryName);
+
   // This is function that will toggle the background and increase the score when the it's true
   function handleClick(e) {
       const btnValue = e.target;
       console.log(btnValue);
-      const findCountryName = quizes.find(quiz => quiz.correctAnswers);
 
       // check if the button value is the same as the country name
-      if (findCountryName === btnValue.id) {
+      if (btnValue.id === findCountryName.correctAnswers) {
           btnValue.style.backgroundColor = 'green';
           setScore((prev) => prev + 1)
-          console.log('You win');
 
-      } else if(findCountryName !== btnValue.id) {
+      } else if(btnValue.id !== findCountryName.correctAnswers) {
         btnValue.style.backgroundColor = 'red';
+
       }
   }
 
