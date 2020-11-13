@@ -50,11 +50,11 @@ function useQuiz() {
 
     // check if the button value is the same as the country name
     if (btnValue.id === findCountryName.correctAnswers) {
-      btnValue.style.backgroundColor = 'green';
+      btnValue.style.backgroundColor = '#004643';
       setScore((prev) => prev + 1)
 
     } else if(btnValue.id !== findCountryName.correctAnswers) {
-      btnValue.style.backgroundColor = 'red';
+      btnValue.style.backgroundColor = '#e16162';
     }
   }
 

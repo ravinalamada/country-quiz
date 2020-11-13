@@ -1,15 +1,14 @@
 h1 {
   text-align: center;
-  color: #FFFFFF;
+  color: #fffffe;
 }
 
 main {
   margin: 16px;
 }
 
-.capitalComponent,
-.flagComponent {
-  background: #FFFFFF;
+.container {
+  background: #fffffe;
   border-radius: 24px;
   margin-top: 60px;
   padding: 16px;
@@ -67,7 +66,7 @@ button {
 }
 
 @media (min-width: 1000px) {
-  .capitalComponent {
+  .container {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
