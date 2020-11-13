@@ -3,12 +3,21 @@ h1 {
   color: #fffffe;
 }
 
+h2 {
+  color: #1D355D;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 27px;
+}
+
 main {
   margin: 16px;
 }
 
 .container {
   background: #fffffe;
+  background-repeat: no-repeat;
+  background-size:  100% 100%;
   border-radius: 24px;
   margin-top: 60px;
   padding: 16px;
@@ -49,8 +58,12 @@ button {
   background-color: '#FF8A65'
 }
 
+button:hover,
 .nextBtn {
   background: #F9A826;
+}
+
+.nextBtn {
   box-shadow: 0px 2px 4px rgba(252, 168, 47, 0.4);
   border-radius: 12px;
   padding-left: 37px;

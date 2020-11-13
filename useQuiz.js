@@ -47,7 +47,7 @@ function useQuiz() {
   // This is function that will toggle the background and increase the score when the it's true
   function handleClick(e) {
     const btnValue = e.target;
-
+    setShowNextPage(true);
     // check if the button value is the same as the country name
     if (btnValue.id === findCountryName.correctAnswers) {
       btnValue.style.backgroundColor = '#004643';

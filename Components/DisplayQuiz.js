@@ -15,7 +15,7 @@ function DisplayQuiz() {
     // I mapped the
     const mappedQuestion = quizes.find(quiz => quiz.question.question1);
     return (
-      <div className="capitalComponent">
+      <div className="container">
       <div className="wrapper">
       {mappedQuestion
         ? quizes.map(quiz => (
@@ -53,7 +53,7 @@ function DisplayQuiz() {
             </form>
             ))}
             </fieldset>
-            <button className={`${quizes.answers ? 'showNextBtn' : 'hideNextBtn'} nextBtn`} value={showNextPage} onClick={HandleNextPage}>Next</button>
+            {showNextPage && <button className='nextBtn' onClick={HandleNextPage}>Next</button>}
             </div>
             )
 

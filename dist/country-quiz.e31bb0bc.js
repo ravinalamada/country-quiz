@@ -33974,13 +33974,14 @@ function useQuiz() {
   const findCountryName = quizes.find(quiz => quiz.correctAnswers); // This is function that will toggle the background and increase the score when the it's true
 
   function handleClick(e) {
-    const btnValue = e.target; // check if the button value is the same as the country name
+    const btnValue = e.target;
+    setShowNextPage(true); // check if the button value is the same as the country name
 
     if (btnValue.id === findCountryName.correctAnswers) {
-      btnValue.style.backgroundColor = 'green';
+      btnValue.style.backgroundColor = '#004643';
       setScore(prev => prev + 1);
     } else if (btnValue.id !== findCountryName.correctAnswers) {
-      btnValue.style.backgroundColor = 'red';
+      btnValue.style.backgroundColor = '#e16162';
     }
   } // Start the Quiz
 
@@ -34030,7 +34031,7 @@ function DisplayQuiz() {
 
   const mappedQuestion = quizes.find(quiz => quiz.question.question1);
   return /*#__PURE__*/_react.default.createElement("div", {
-    className: "capitalComponent"
+    className: "container"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "wrapper"
   }, mappedQuestion ? quizes.map(quiz => /*#__PURE__*/_react.default.createElement("div", {
@@ -34054,9 +34055,8 @@ function DisplayQuiz() {
   }, quiz.answers[2]), /*#__PURE__*/_react.default.createElement("button", {
     onClick: e => handleClick(e),
     id: quiz.answers[3]
-  }, quiz.answers[3])))), /*#__PURE__*/_react.default.createElement("button", {
-    className: `${quizes.answers ? 'showNextBtn' : 'hideNextBtn'} nextBtn`,
-    value: showNextPage,
+  }, quiz.answers[3])))), showNextPage && /*#__PURE__*/_react.default.createElement("button", {
+    className: "nextBtn",
     onClick: HandleNextPage
   }, "Next"));
 }
@@ -34152,7 +34152,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51784" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53796" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
