@@ -1,22 +1,18 @@
-import React from 'react'
-import useQuiz from '../useQuiz';
+import React from 'react';
+import reward from '../images/reward.svg';
 
-function Result() {
 
-  // Grabbed the variables from useQuiz components
-  const [quizes,
-    isLoading,
-    score,
-    showNextPage,
-    HandleNextPage,
-    handleClick,
-    checkLoading] = useQuiz();
+function Result({score}) {
 
   return (
-      <div className="capitalComponent">
-        <h2>Results</h2>
-        <h3>You got {score} correct answers</h3>
-      </div>
+      <section className="results">
+        <div><img className="results-img" src={reward} alt="reward"/></div>
+        <div><h2>Results</h2></div>
+        <div>You got <h4>&nbsp;{score}&nbsp;</h4>correct answers</div>
+        <div>
+          <button className="results-btn">Try again</button>
+        </div>
+      </section>
   )
 
 }

@@ -1,13 +1,11 @@
 import {useState, useEffect} from 'react';
 import quizQuestions from './Components/Questions';
-import Result from './Components/Result'
 
 function useQuiz() {
 
   // I initialise the varibles
   const [quizes, setQuizes ] = useState([]);
   const [score, setScore] = useState(0)
-  const [isLoading, setIsLoading] = useState(false);
   const [showNextPage, setShowNextPage] = useState(false);
 
   // Fetch the countries
@@ -33,6 +31,7 @@ function useQuiz() {
       correctAnswers: randomQuizes.name,
       images: randomQuizes.flag,
       capital: randomQuizes.capital,
+      isCorrect: false,
     }
     setQuizes([quizObject]);
   }
@@ -46,41 +45,35 @@ function useQuiz() {
 
   // This is function that will toggle the background and increase the score when the it's true
   function handleClick(e) {
-    const btnValue = e.target;
+    const btn = e.target;
     setShowNextPage(true);
+
     // check if the button value is the same as the country name
-    if (btnValue.id === findCountryName.correctAnswers) {
-      btnValue.style.backgroundColor = '#004643';
+    if (btn.value === findCountryName.correctAnswers) {
+      btn.style.backgroundColor = '#004643';
       setScore((prev) => prev + 1)
 
-    } else if(btnValue.id !== findCountryName.correctAnswers) {
-      btnValue.style.backgroundColor = '#e16162';
+    } else if(btn.value !== findCountryName.correctAnswers) {
+      btn.style.backgroundColor = '#e16162';
     }
-  }
-
-  // Start the Quiz
-  function checkLoading() {
-    setIsLoading(!isLoading);
   }
 
   // This function will display the next page
   function HandleNextPage(e) {
+    getcountries()
     const btn = e.target;
     const findAnswer = quizes.find(quiz => quiz.correctAnswers);
-    if (findAnswer === btn.id) {
-      console.log('true');
-      getcountries()
+    if (findAnswer === btn.value) {
     }
   }
 
   // Return the variables and the function names that are needed
   return [quizes,
-    isLoading,
     score,
     showNextPage,
     HandleNextPage,
-    handleClick,
-    checkLoading]
-  }
+    handleClick
+  ]
+}
 
-  export default useQuiz;
+export default useQuiz;

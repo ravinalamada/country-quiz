@@ -1,62 +1,64 @@
 import React, {useState} from 'react';
 import useQuiz from '../useQuiz';
+import Button  from '../Components/Buttons';
+import andventure from '../images/adventure.svg';
+
 // import quizQuestions from './Questions'
 
-function DisplayQuiz() {
+function DisplayQuiz({props}) {
 
   const [ quizes,
-    isLoading,
     score,
     showNextPage,
     HandleNextPage,
     handleClick,
-    checkLoading] = useQuiz()
+  ] = useQuiz()
 
-    // I mapped the
-    const mappedQuestion = quizes.find(quiz => quiz.question.question1);
-    return (
-      <div className="container">
-      <div className="wrapper">
-      {mappedQuestion
-        ? quizes.map(quiz => (
+  // I mapped the
+  const mappedQuestion = quizes.find(quiz => quiz.question.question1);
+  return (
+    <div className="container">
+    <img src={andventure} className="andventure"></img>
+    <div className="wrapper">
+    {mappedQuestion
+      ? quizes.map(quiz => (
+        <div key={quiz.images}>
+        <h2>{quiz.capital} is the capital of</h2>
+        </div>
+        ))
+        : quizes.map(quiz => (
           <div key={quiz.images}>
-          <h2>{quiz.capital} is the capital of</h2>
+          <img src={quiz.images} alt="Flag"/>
+          <h2>Which country does this flag belong to ?</h2>
           </div>
           ))
-          : quizes.map(quiz => (
-            <div key={quiz.images}>
-            <img src={quiz.images} alt="Flag"/>
-            <h2>Which country does this flag belong to ?</h2>
-            </div>
-            ))
-          }
+        }
+        </div>
+        <fieldset >
+        {quizes.map(quiz => (
+          <form key={quiz}>
+          <button onClick={handleClick} value={quiz.answers[0]}>
+          <div className="letter">A</div>
+          <div className="answers">{quiz.answers[0]}</div>
+          </button>
+          <button onClick={handleClick} value={quiz.answers[1]} >
+          <div className="letter">B</div>
+          <div className="answers">{quiz.answers[1]}</div>
+          </button>
+          <button onClick={handleClick} value={quiz.answers[2]}>
+          <div className="letter">C</div>
+          <div className="answers">{quiz.answers[2]}</div>
+          </button>
+          <button onClick={handleClick} value={quiz.answers[3]}>
+          <div className="letter">D</div>
+          <div className="answers">{quiz.answers[3]}</div>
+          </button>
+          </form>
+          ))}
+          </fieldset>
+          {showNextPage && <Button />}
           </div>
-          <fieldset >
-          {quizes.map(quiz => (
-            <form key={quiz}>
-            <button
-            onClick={(e) => handleClick(e)}
-            id={quiz.answers[0]}
-            >{quiz.answers[0]}</button>
-            <button
-            onClick={(e) => handleClick(e)}
-            id={quiz.answers[1]}
-            >{quiz.answers[1]}</button>
-            <button
-            onClick={(e) => handleClick(e)}
-            id={quiz.answers[2]}
-            >{quiz.answers[2]}</button>
-            <button
-            onClick={(e) => handleClick(e)}
-            id={quiz.answers[3]}
-            >{quiz.answers[3]}</button>
-            </form>
-            ))}
-            </fieldset>
-            {showNextPage && <button className='nextBtn' onClick={HandleNextPage}>Next</button>}
-            </div>
-            )
+          )
+        }
 
-          }
-
-          export default DisplayQuiz;
+        export default DisplayQuiz;
