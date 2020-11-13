@@ -7,6 +7,8 @@ function useQuiz() {
   const [quizes, setQuizes ] = useState([]);
   const [score, setScore] = useState(0)
   const [showNextPage, setShowNextPage] = useState(false);
+  const [showResult, setShowResult ]= useState(false);
+  const [isCorrect, setIsCorrect ]= useState(false);
 
   // Fetch the countries
   async function getcountries() {
@@ -49,21 +51,29 @@ function useQuiz() {
     setShowNextPage(true);
 
     // check if the button value is the same as the country name
-    if (btn.value === findCountryName.correctAnswers) {
+    if (btn.id === findCountryName.correctAnswers) {
       btn.style.backgroundColor = '#004643';
       setScore((prev) => prev + 1)
+      setIsCorrect(true)
 
-    } else if(btn.value !== findCountryName.correctAnswers) {
+    } else if(btn.id !== findCountryName.correctAnswers) {
       btn.style.backgroundColor = '#e16162';
+      setShowResult(true);
     }
+  }
+
+  // This will display the homepage
+  function handleGoBackToHome() {
+    setShowResult(false)
+    getcountries()
   }
 
   // This function will display the next page
   function HandleNextPage(e) {
-    getcountries()
     const btn = e.target;
     const findAnswer = quizes.find(quiz => quiz.correctAnswers);
     if (findAnswer === btn.value) {
+      getcountries()
     }
   }
 
@@ -71,8 +81,11 @@ function useQuiz() {
   return [quizes,
     score,
     showNextPage,
+    showResult,
+    isCorrect,
     HandleNextPage,
-    handleClick
+    handleClick,
+    handleGoBackToHome
   ]
 }
 

@@ -1,16 +1,17 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import reward from '../images/reward.svg';
 
 
-function Result({score}) {
+function Result({score, handleGoBackToHome}) {
 
   return (
       <section className="results">
         <div><img className="results-img" src={reward} alt="reward"/></div>
         <div><h2>Results</h2></div>
-        <div>You got <h4>&nbsp;{score}&nbsp;</h4>correct answers</div>
+        <div>You got <b>{score}</b> correct answers</div>
         <div>
-          <button className="results-btn">Try again</button>
+          <Link to="/"><button className="results-btn" onClick={handleGoBackToHome}>Try again</button></Link>
         </div>
       </section>
   )

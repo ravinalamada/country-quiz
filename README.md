@@ -1,88 +1,38 @@
 # Country Quiz
 
-Challenge: Create a country quiz app using an API, and use React to handle the frontend. Don’t look at the existing solution. Fulfill user stories below:
-
-![image](./assets/quiz1.png)
-![image](./assets/quiz2.png)
-![image](./assets/quiz3.png)
-![image](./assets/quiz4.png)
-
--   User story: I can see at least 2 types of question: a city is the capital of.. or a flag belong to country..
--   User story: I can see select an answer
--   User story: I can see if my answer is correct or incorrect
--   User story: When I answer correctly, I can move on to the next question
--   User story: When I answer incorrectly, I can see my results and try again
--   User story: I can try again
-
-**Icon**: https://google.github.io/material-design-icons/
-
-**API**: https://restcountries.eu/. Use data from the API to create questions and answers.
-
-**Design** : https://www.figma.com/file/Gw0ZNBbYN8asqFlZWy3jG1
-
-**Live app** : https://country-quiz-app.netlify.app/
-
-As long as you fulfill all the user stories, you can give your personal touches by adding transition, using your own images, changing colors, or even creating your own layout,...
-
-Once you completed, submit your solutions by providing URLs for both GitHub repository and live app on Netlify and explain briefly what you have done.
-
-For the custom domain url you'll enter in netlify, please use the following naming convention : **country-quiz-_YOUR_FIRSTNAME_.netlify.app** (replace YOUR_FIRSTNAME by your firstname)
-
-Good luck everybody!
-
-Template for your readme :
-
-<!-- Please update value in the {}  -->
-
-<h1 align="center">Country quiz</h1>
-
-<div align="center">
-  <h3>
-    <a href="https://app.netlify.com/sites/prisca-country-quiz/settings/domain/setup">
-      Demo
-    </a>
-    <span> | </span>
-    <a href="https://{your-url-to-the-solution}">
-      Solution
-    </a>
-  </h3>
-</div>
-
-<!-- TABLE OF CONTENTS -->
-
-## Table of Contents
-
--   [Overview](#overview)
-    -   [Built With](#built-with)
--   [Features](#features)
--   [How to use](#how-to-use)
--   [Contact](#contact)
--   [Acknowledgements](#acknowledgements)
-
-<!-- OVERVIEW -->
+[Demo](https://app.netlify.com/sites/prisca-country-quiz/settings/domain/setup)
+[solution](https://github.com/ravinalamada/country-quiz)
 
 ## Overview
 
-![screenshot](https://user-images.githubusercontent.com/16707738/92399059-5716eb00-f132-11ea-8b14-bcacdc8ec97b.png)
+![screenshot1](./assets/quiz-screenshoot.png)
+![screenshot2](./assets/quiz-screenshoot2.png)
 
-Introduce your projects by taking a screenshot or a gif. Try to tell visitors a story about your project by answering:
+### Where can I see your demo?
+You can find my demo in Github.com by following the github link that I wrote above.
 
--   Where can I see your demo?
--   What was your experience?
--   What have you learned/improved?
+### What was your experience?
+I had a great deal of difficulty in debugging my code which taught me that it is good to have a nice variable name.
+
+### What have you learned/improved?
+I learned more how to display data randomly and components as well which was really new for me. I also understand more how custom hook works which makes me feel strong and happy a bit more. I still need to improve my knowledge on how react really works because I struggled a lot to solve this project. I also couldn't finish all so I need to finish so that it will works properly.
+
 -   Your wisdom? :)
+I think it is really important to have clean and well named code.
 
 ### Built With
 
-<!-- This section should list any major frameworks that you built your project using. Here are a few examples.-->
-
 -   [React](https://reactjs.org/)
 
-## Features
+### Features
+- I have a Header components which contains the header contenets
+- I have Display components that dispaly the quizes card
+- A useQuiz component that contains the all logics
+- Buttons components that display the button that shows the next page
+- A Results component that display the result card
+- Fotter component that displays the footer contents
 
-<!-- List the features of your application or follow the template. Don't share the figma file here :) -->
-
-## How To Use
+### How To Use
 
 <!-- Example: -->
 
@@ -99,12 +49,7 @@ $ npm install
 $ npm start
 ```
 
-## Acknowledgements
-
-<!-- This section should list any articles or add-ons/plugins that helps you to complete the project. This is optional but it will help you in the future. For example: -->
-
 ## Contact
 
--   Website [your-website.com](https://{your-web-site-link})
--   GitHub [@your-username](https://{github.com/your-usermame})
--   Twitter [@your-twitter](https://{twitter.com/your-username})
+-   Website [netlify.com](https://app.netlify.com/sites/prisca-country-quiz/settings/domain/setup)
+-   GitHub [@ravinalamada](https://github.com/ravinalamada/country-quiz)
