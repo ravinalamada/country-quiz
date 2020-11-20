@@ -34184,8 +34184,7 @@ function Main() {
   }) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, quizes.map(quiz => /*#__PURE__*/_react.default.createElement(_DisplayQuiz.default, {
     key: quiz.capital,
     handleClick: handleClick,
-    quiz: quiz // HandleNextPage={HandleNextPage}
-    ,
+    quiz: quiz,
     isCorrect: isCorrect
   })), showNextPage && /*#__PURE__*/_react.default.createElement(_Buttons.default, {
     isCorrect: isCorrect,
@@ -34193,28 +34192,7 @@ function Main() {
   })), /*#__PURE__*/_react.default.createElement(_Footer.default, null));
 }
 
-var _default = Main; // {showScore
-//   ? (<TryAgain score={score} tryTheGameAgain={tryTheGameAgain} />)
-//   : (
-//       <div className="container">
-//           {countries.map(country => (
-//               <DisplayQuiz key={country.capital}
-//                   country={country}
-//                   handleClick={handleClick}
-//                   isCorrect={isCorrect}
-//                   toggle={toggle}
-//               />
-//           ))}
-//           {isShow && (<NextButton
-//               handleShowBtn={handleShowBtn}
-//               isCorrect={isCorrect}
-//           />)}
-//       </div>
-//   )
-// }
-// </>
-// )
-
+var _default = Main;
 exports.default = _default;
 },{"react":"node_modules/react/index.js","./DisplayQuiz":"Components/DisplayQuiz.js","../Components/Buttons":"Components/Buttons.js","./Result":"Components/Result.js","../useQuiz":"useQuiz.js","../Components/Footer":"Components/Footer.js"}],"pages/App.js":[function(require,module,exports) {
 "use strict";
@@ -34282,7 +34260,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49740" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52972" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -29,7 +29,6 @@ function Main() {
                 key={quiz.capital}
                 handleClick={handleClick}
                 quiz={quiz}
-                // HandleNextPage={HandleNextPage}
                 isCorrect={isCorrect}
               />
             ))
@@ -48,24 +47,3 @@ function Main() {
 
 export default Main;
 
-// {showScore
-//   ? (<TryAgain score={score} tryTheGameAgain={tryTheGameAgain} />)
-//   : (
-//       <div className="container">
-//           {countries.map(country => (
-//               <DisplayQuiz key={country.capital}
-//                   country={country}
-//                   handleClick={handleClick}
-//                   isCorrect={isCorrect}
-//                   toggle={toggle}
-//               />
-//           ))}
-//           {isShow && (<NextButton
-//               handleShowBtn={handleShowBtn}
-//               isCorrect={isCorrect}
-//           />)}
-//       </div>
-//   )
-// }
-// </>
-// )
