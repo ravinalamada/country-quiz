@@ -33906,6 +33906,8 @@ var _Questions = _interopRequireDefault(require("./Components/Questions"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+const endpoint = "https:restcountries.eu/rest/v2/all";
+
 function useQuiz() {
   // I initialise the varibles
   const [quizes, setQuizes] = (0, _react.useState)([]);
@@ -33915,7 +33917,6 @@ function useQuiz() {
   const [isCorrect, setIsCorrect] = (0, _react.useState)(false); // Fetch the countries
 
   async function getcountries() {
-    const endpoint = "https:restcountries.eu/rest/v2/all";
     const res = await fetch(endpoint);
     const data = await res.json(); // I randomised the country data that I have fetched
 
@@ -34260,7 +34261,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54313" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54692" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

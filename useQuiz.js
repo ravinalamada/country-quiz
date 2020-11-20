@@ -1,6 +1,8 @@
 import {useState, useEffect} from 'react';
 import quizQuestions from './Components/Questions';
 
+const endpoint = "https:restcountries.eu/rest/v2/all" ;
+
 function useQuiz() {
 
   // I initialise the varibles
@@ -12,7 +14,6 @@ function useQuiz() {
 
   // Fetch the countries
   async function getcountries() {
-    const endpoint = "https:restcountries.eu/rest/v2/all" ;
     const res = await fetch(endpoint);
     const data = await res.json();
 
