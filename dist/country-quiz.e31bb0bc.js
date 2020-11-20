@@ -33986,43 +33986,7 @@ function useQuiz() {
 
 var _default = useQuiz;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","./Components/Questions":"Components/Questions.js"}],"Components/Buttons.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _reactRouterDom = require("react-router-dom");
-
-var _useQuiz = _interopRequireDefault(require("../useQuiz"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function Buttons({
-  correctAnswers,
-  isCorrect
-}) {
-  const [quizes, score, showNextPage, HandleNextPage, handleClick] = (0, _useQuiz.default)();
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCorrect ? /*#__PURE__*/_react.default.createElement("button", {
-    className: "nextBtn",
-    onClick: HandleNextPage,
-    value: correctAnswers
-  }, "Next") : /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "./Results",
-    onClick: HandleNextPage,
-    value: correctAnswers
-  }, /*#__PURE__*/_react.default.createElement("button", {
-    className: "nextBtn"
-  }, "Next")));
-}
-
-var _default = Buttons;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../useQuiz":"useQuiz.js"}],"images/adventure.svg":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./Components/Questions":"Components/Questions.js"}],"images/adventure.svg":[function(require,module,exports) {
 module.exports = "/adventure.7d6e9b33.svg";
 },{}],"Components/DisplayQuiz.js":[function(require,module,exports) {
 "use strict";
@@ -34032,19 +33996,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
 var _useQuiz = _interopRequireDefault(require("../useQuiz"));
-
-var _Buttons = _interopRequireDefault(require("../Components/Buttons"));
 
 var _adventure = _interopRequireDefault(require("../images/adventure.svg"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 // import quizQuestions from './Questions'
 function DisplayQuiz({
@@ -34099,7 +34057,43 @@ function DisplayQuiz({
 
 var _default = DisplayQuiz;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../useQuiz":"useQuiz.js","../Components/Buttons":"Components/Buttons.js","../images/adventure.svg":"images/adventure.svg"}],"images/reward.svg":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../useQuiz":"useQuiz.js","../images/adventure.svg":"images/adventure.svg"}],"Components/Buttons.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactRouterDom = require("react-router-dom");
+
+var _useQuiz = _interopRequireDefault(require("../useQuiz"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Buttons({
+  correctAnswers,
+  isCorrect
+}) {
+  const [quizes, score, showNextPage, HandleNextPage, handleClick] = (0, _useQuiz.default)();
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, isCorrect ? /*#__PURE__*/_react.default.createElement("button", {
+    className: "nextBtn",
+    onClick: HandleNextPage,
+    value: correctAnswers
+  }, "Next") : /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    to: "./Results",
+    onClick: HandleNextPage,
+    value: correctAnswers
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    className: "nextBtn"
+  }, "Next")));
+}
+
+var _default = Buttons;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../useQuiz":"useQuiz.js"}],"images/reward.svg":[function(require,module,exports) {
 module.exports = "/reward.e69d7be0.svg";
 },{}],"Components/Result.js":[function(require,module,exports) {
 "use strict";
@@ -34261,7 +34255,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54692" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52570" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
