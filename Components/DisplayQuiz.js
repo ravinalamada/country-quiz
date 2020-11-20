@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
 import useQuiz from '../useQuiz';
-import Button  from '../Components/Buttons';
 import andventure from '../images/adventure.svg';
 
 // import quizQuestions from './Questions'
@@ -49,7 +48,6 @@ function DisplayQuiz({quiz,handleClick}) {
       </form>
       ))}
       </fieldset>
-      {/* {showNextPage && <Button />} */}
       </div>
       )
     }
