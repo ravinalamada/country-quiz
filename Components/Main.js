@@ -1,45 +1,29 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {Switch, Route} from 'react-router-dom';
 import DisplayQuiz from './DisplayQuiz';
-import Button  from '../Components/Buttons';
-import Result from './Result';
-import useQuiz from '../useQuiz';
 import Footer from '../Components/Footer';
+import andventure from '../images/adventure.svg';
+import Result from '../Components/Result';
+import { Context } from '../ContextProvider';
 
 function Main() {
+  const {
+         score,
+         showResult,
+         handleGoBackToHome
+        } = useContext(Context)
 
-  const  [quizes,
-    score,
-    showNextPage,
-    showResult,
-    isCorrect,
-    HandleNextPage,
-    handleClick,
-    handleGoBackToHome
-  ] = useQuiz()
+        console.log(showResult);
 
   return (
     <main>
-      {showResult
-      ? <Result score={score} handleGoBackToHome={handleGoBackToHome}/>
-      :
-        <>
-          {
-            quizes.map(quiz => (
-              <DisplayQuiz
-                key={quiz.capital}
-                handleClick={handleClick}
-                quiz={quiz}
-                isCorrect={isCorrect}
-              />
-            ))
-
-          }
-          {
-            showNextPage && <Button isCorrect={isCorrect} HandleNextPage={HandleNextPage}/>
-          }
-        </>
-
-      }
+      <div className="container">
+        <img src={andventure} className="andventure"></img>
+        <Switch>
+           <Route exact path="/"><DisplayQuiz /></Route>
+           <Route path="/result"><Result handleGoBackToHome={handleGoBackToHome} score={score} /></Route>
+        </Switch>
+      </div>
     <Footer />
   </main>
   )

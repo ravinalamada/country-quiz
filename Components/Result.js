@@ -2,7 +2,6 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import reward from '../images/reward.svg';
 
-
 function Result({score, handleGoBackToHome}) {
 
   return (

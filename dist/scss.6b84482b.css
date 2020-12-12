@@ -77,16 +77,16 @@ h2 {
   border-radius: 12px;
 }
 
-fieldset,
 .bg {
   border-color: transparent;
 }
 
-form {
+.btn-container {
   display: flex;
   flex-direction: column;
 }
-form button {
+
+.btn-container button {
   border: 2px solid rgba(96, 102, 208, 0.7);
   box-sizing: border-box;
   border-radius: 12px;
@@ -94,15 +94,17 @@ form button {
   display: flex;
   text-align: left;
 }
-form .letter,
-form .answers {
+
+.letter,
+.answers {
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
   line-height: 27px;
   color: rgba(96, 102, 208, 0.8);
 }
-form .letter {
+
+.letter {
   width: 50px;
   margin-right: 60px;
   margin-left: 19px;
@@ -111,14 +113,6 @@ form .letter {
 button {
   padding-top: 14px;
   padding-bottom: 15px;
-}
-
-.greenBg {
-  background-color: "#81C784";
-}
-
-.redBg {
-  background-color: "#FF8A65";
 }
 
 button:hover,
@@ -139,6 +133,14 @@ button:hover,
 
 .hideNextBtn {
   display: none;
+}
+
+.greenBg {
+  background-color: #81C784;
+}
+
+.redBg {
+  background-color: #FF8A65;
 }
 
 @media (min-width: 1000px) {

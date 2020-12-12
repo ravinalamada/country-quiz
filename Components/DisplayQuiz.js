@@ -1,55 +1,54 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import useQuiz from '../useQuiz';
-import andventure from '../images/adventure.svg';
+import Button  from '../Components/Buttons';
+import { Context } from '../ContextProvider';
+import Questions from './Questions';
 
-// import quizQuestions from './Questions'
+function DisplayQuiz(e) {
+  const {quizesData,
+         showNextBtn,
+         btnRef,
+         handleClick,
+         handleNextBtn,
+         handleShowResult} = useContext(Context)
+  const {country, questions, answerOptions} = quizesData;
 
-function DisplayQuiz({quiz,handleClick}) {
+  const correctAnswers = quizesData.answers;
 
-  const [ quizes] = useQuiz()
-
-  // I mapped the
-  const mappedQuestion = quizes.find(quiz => quiz.question.question1);
   return (
-    <div className="container">
-    <img src={andventure} className="andventure"></img>
-    <div className="wrapper">
-    {mappedQuestion
-      ?
+    <div>
       <div>
-      <h2>{quiz.capital} is the capital of</h2>
+        { questions === Questions.question1
+          ? <h3>{country && country.name}{questions && questions.question1}</h3>
+          : <div>
+             <img src={country.flag}/>
+             <h3>{questions && questions.question2}</h3>
+            </div>
+        }
       </div>
-      :
       <div>
-      <img src={quiz.images} alt="Flag"/>
-      <h2>Which country does this flag belong to ?</h2>
+        <div className="btn-container">
+          <button ref={ correctAnswers === e.target.value ? btnRef : null} onClick={handleClick} value={ answerOptions && answerOptions[0]}>
+            <div className="letter">A</div>
+            <div className="answers">{answerOptions && answerOptions[0]}</div>
+          </button>
+          <button ref={ correctAnswers === e.target.value ? btnRef : null} onClick={handleClick} value={answerOptions && answerOptions[1]} >
+          <div className="letter">B</div>
+          <div className="answers">{answerOptions && answerOptions[1]}</div>
+          </button>
+          <button ref={ correctAnswers === e.target.value ? btnRef : null} onClick={handleClick} value={answerOptions && answerOptions[2]}>
+          <div className="letter">C</div>
+          <div className="answers">{answerOptions && answerOptions[2]}</div>
+          </button>
+          <button ref={ correctAnswers === e.target.value ? btnRef : null} onClick={handleClick} value={answerOptions && answerOptions[3]}>
+          <div className="letter">D</div>
+          <div className="answers">{answerOptions && answerOptions[3]}</div>
+          </button>
+        </div>
       </div>
-    }
+      {showNextBtn && <Button handleShowResult={handleShowResult} handleNextBtn={handleNextBtn}>Next</Button>}
     </div>
-    <fieldset >
-    {quizes.map(quiz => (
-      <form key={quiz}>
-      <button onClick={handleClick} id={quiz.answers[0]}>
-        <div className="letter">A</div>
-        <div className="answers">{quiz.answers[0]}</div>
-      </button>
-      <button onClick={handleClick} id={quiz.answers[1]} >
-        <div className="letter">B</div>
-        <div className="answers">{quiz.answers[1]}</div>
-      </button>
-      <button onClick={handleClick} id={quiz.answers[2]}>
-        <div className="letter">C</div>
-        <div className="answers">{quiz.answers[2]}</div>
-      </button>
-      <button onClick={handleClick} id={quiz.answers[3]}>
-        <div className="letter">D</div>
-        <div className="answers">{quiz.answers[3]}</div>
-      </button>
-      </form>
-      ))}
-      </fieldset>
-      </div>
-      )
-    }
+    )
+  }
 
-    export default DisplayQuiz;
+  export default DisplayQuiz;
