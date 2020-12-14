@@ -1,6 +1,6 @@
 # Country Quiz
 
-[Demo](https://app.netlify.com/sites/prisca-country-quiz/settings/domain/setup)
+[Demo](https://prisca-country-quiz.netlify.app/)
 [solution](https://github.com/ravinalamada/country-quiz)
 
 ## Overview
@@ -51,5 +51,5 @@ $ npm start
 
 ## Contact
 
--   Website [netlify.com](https://app.netlify.com/sites/prisca-country-quiz/settings/domain/setup)
+-   Website [netlify.com](https://prisca-country-quiz.netlify.app/)
 -   GitHub [@ravinalamada](https://github.com/ravinalamada/country-quiz)
