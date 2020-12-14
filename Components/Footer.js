@@ -3,8 +3,8 @@ import React from 'react';
 function Footer() {
 
   return (
-    <footer>
-      <p>Prisca@ DevChallenges.io</p>
+    <footer className="footer">
+      <p className="footer--desc">Prisca@ DevChallenges.io</p>
     </footer>
   )
 }

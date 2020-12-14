@@ -10,10 +10,10 @@ function ContextProvider({children}) {
   const [ quizesData,setQuizesData ] = useState([]);
   const [isCorrect, setIsCorrect] = useState(false);
   const [showNextBtn, setShowNextBtn] = useState(false);
-  const [showResult, setShowResult] = useState(false);
   const [score, setScore] = useState(0);
   const btnRef = useRef(null)
 
+  // Randomize the quizes data
   async function getQuiz() {
     const fetchQuizes = await fetch(endpoint);
     const responseQuizes = await fetchQuizes.json();
@@ -43,40 +43,38 @@ function ContextProvider({children}) {
   // Check if the answers are correct, if so change the button's bg-color into green otherwise red
   function handleClick(e) {
     // Grab the button that is clicked
-     const btn = e.target;
+     const btn = e.currentTarget;
     // Find the correct answers
     const correctAnswers = quizesData.answers;
 
     if(btn.value === correctAnswers) {
-      btn.classList.add('greenBg');
+      btn.classList.add('correct');
       setIsCorrect(true);
       setShowNextBtn(true);
       setScore(prev => prev + 1);
     }
     else if(btn.value !== correctAnswers) {
-      btn.classList.add('redBg')
-      btnRef.current.classList.add('greenBg');
+      btn.classList.add('incorrect')
+      btnRef.current.classList.add('correct');
       setShowNextBtn(true);
+      setIsCorrect(false)
     }
     else {
-      btn.classList.add('');
+      btn.classList.add('white');
     }
   }
 
   // Show the next quiz
   function handleNextBtn() {
     getQuiz();
-  }
-
-  // Show the result
-  function handleShowResult() {
-    setShowResult(true)
+    setShowNextBtn(false);
+    btnRef.current.classList.add('white')
   }
 
   // Go back to the homepage
     function handleGoBackToHome () {
       getQuiz();
-      btnRef.current.classList.add('')
+      setShowNextBtn(false)
     }
 
   return (
@@ -84,12 +82,10 @@ function ContextProvider({children}) {
                               quizesData,
                               isCorrect,
                               showNextBtn,
-                              showResult,
                               score,
                               btnRef,
                               handleClick,
                               handleNextBtn,
-                              handleShowResult,
                               handleGoBackToHome,
                             }}>
        {children}

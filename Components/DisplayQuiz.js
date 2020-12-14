@@ -1,8 +1,9 @@
 import React, {useContext} from 'react';
-import useQuiz from '../useQuiz';
 import Button  from '../Components/Buttons';
 import { Context } from '../ContextProvider';
 import Questions from './Questions';
+import andventure from '../images/adventure.svg';
+import Letters from '../Components/Letters';
 
 function DisplayQuiz(e) {
   const {quizesData,
@@ -11,42 +12,51 @@ function DisplayQuiz(e) {
          handleClick,
          handleNextBtn,
          handleShowResult} = useContext(Context)
+
+  // Destructure the data that I am going to use
   const {country, questions, answerOptions} = quizesData;
 
+  // Grab the correct answers that will be compared with the button value
   const correctAnswers = quizesData.answers;
 
+  // I mapped the letters array in order to get display it
+  const mappedLetters = Letters.map((letter) => (<div key={letter}>{letter}</div>))
+
   return (
-    <div>
-      <div>
-        { questions === Questions.question1
-          ? <h3>{country && country.name}{questions && questions.question1}</h3>
-          : <div>
-             <img src={country.flag}/>
-             <h3>{questions && questions.question2}</h3>
+    <div className="container">
+      <div className="adventure--wrapper">
+        <img src={andventure} className="andventure" />
+      </div>
+      <div className="contents--wrapper">
+        { questions && questions.question1
+          ? <div className="countryName--wrapper">
+              <h2 className="heading3">{country && country.name} {questions && questions.question1}</h2>
+            </div>
+          : <div  className="flag--wrapper">
+             <img src={country && country.flag}/>
+             <h3 className="heading3">{questions && questions.question2}</h3>
             </div>
         }
       </div>
       <div>
-        <div className="btn-container">
-          <button ref={ correctAnswers === e.target.value ? btnRef : null} onClick={handleClick} value={ answerOptions && answerOptions[0]}>
-            <div className="letter">A</div>
-            <div className="answers">{answerOptions && answerOptions[0]}</div>
-          </button>
-          <button ref={ correctAnswers === e.target.value ? btnRef : null} onClick={handleClick} value={answerOptions && answerOptions[1]} >
-          <div className="letter">B</div>
-          <div className="answers">{answerOptions && answerOptions[1]}</div>
-          </button>
-          <button ref={ correctAnswers === e.target.value ? btnRef : null} onClick={handleClick} value={answerOptions && answerOptions[2]}>
-          <div className="letter">C</div>
-          <div className="answers">{answerOptions && answerOptions[2]}</div>
-          </button>
-          <button ref={ correctAnswers === e.target.value ? btnRef : null} onClick={handleClick} value={answerOptions && answerOptions[3]}>
-          <div className="letter">D</div>
-          <div className="answers">{answerOptions && answerOptions[3]}</div>
-          </button>
+        <div className="btn--wrapper">
+          {answerOptions && answerOptions.map((opt, i) => (
+            <button key={opt}
+                    className="btn"
+                    value={opt}
+                    onClick={handleClick}
+                    ref={correctAnswers === opt ? btnRef : null}>
+              <span className="letter">{mappedLetters[i]}</span>
+              <span className="answers">{opt}</span>
+            </button>
+          ))}
         </div>
       </div>
-      {showNextBtn && <Button handleShowResult={handleShowResult} handleNextBtn={handleNextBtn}>Next</Button>}
+      {showNextBtn && <Button
+        handleShowResult={handleShowResult}
+        handleNextBtn={handleNextBtn}
+        value={correctAnswers}
+        >Next</Button>}
     </div>
     )
   }
