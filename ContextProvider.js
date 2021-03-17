@@ -74,6 +74,7 @@ function ContextProvider({children}) {
   // Go back to the homepage
     function handleGoBackToHome () {
       getQuiz();
+      setScore(0)
       setShowNextBtn(false)
     }
 

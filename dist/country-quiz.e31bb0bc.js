@@ -33964,6 +33964,7 @@ function ContextProvider({
 
   function handleGoBackToHome() {
     getQuiz();
+    setScore(0);
     setShowNextBtn(false);
   }
 
@@ -34320,7 +34321,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62315" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60185" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

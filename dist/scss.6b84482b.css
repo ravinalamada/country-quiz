@@ -2,12 +2,11 @@ body {
   font-family: "Poppins", Arial, Helvetica, sans-serif;
   background-image: url("/background.e3ad310f.png");
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
   font-style: normal;
   font-weight: 500;
   margin: 0;
   padding: 0;
-  height: 100vh;
 }
 
 * {
@@ -192,11 +191,11 @@ img {
   }
 
   .andventure {
-    top: -14%;
+    top: -12%;
   }
 
   .footer {
-    margin-top: 150px;
+    margin-top: 50px;
   }
 }
 
