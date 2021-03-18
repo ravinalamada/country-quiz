@@ -33915,6 +33915,9 @@ function ContextProvider({
     const opt2 = responseQuizes[Math.floor(Math.random() * responseQuizes.length)];
     const opt3 = responseQuizes[Math.floor(Math.random() * responseQuizes.length)];
     const randomAnswers = [randomQuiz.name, opt1.name, opt2.name, opt3.name];
+    randomAnswers.sort(() => {
+      return 0.5 - Math.random();
+    });
 
     const randomQuestions = _Questions.default[Math.floor(Math.random() * _Questions.default.length)]; //Initialized the quizData that will be used later
 
@@ -34169,7 +34172,9 @@ function Result({
 }) {
   return /*#__PURE__*/_react.default.createElement("section", {
     className: "results"
-  }, /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("img", {
+  }, /*#__PURE__*/_react.default.createElement("div", {
+    className: "results--wrapper"
+  }, /*#__PURE__*/_react.default.createElement("img", {
     className: "results--img",
     src: _reward.default,
     alt: "reward"
@@ -34179,7 +34184,9 @@ function Result({
     className: "results--desc"
   }, "You got ", /*#__PURE__*/_react.default.createElement("span", {
     className: "results--score"
-  }, score), " correct answers")), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+  }, score), " correct answers")), /*#__PURE__*/_react.default.createElement("div", {
+    className: "results__btn--wrapper"
+  }, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
     to: "/"
   }, /*#__PURE__*/_react.default.createElement("button", {
     className: "results__btn",
@@ -34321,7 +34328,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60185" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63718" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
