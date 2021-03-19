@@ -33938,7 +33938,9 @@ function ContextProvider({
 
   function handleClick(e) {
     // Grab the button that is clicked
-    const btn = e.currentTarget; // Find the correct answers
+    const btn = e.currentTarget;
+    const buttonsArr = Array.from(document.querySelectorAll('button.btn'));
+    buttonsArr.map(button => button.classList.add('disabled')); // Find the correct answers
 
     const correctAnswers = quizesData.answers;
 
@@ -33947,9 +33949,11 @@ function ContextProvider({
       setIsCorrect(true);
       setShowNextBtn(true);
       setScore(prev => prev + 1);
+      btnRef.current.setAttribute('id', 'disabled-correct-btn');
     } else if (btn.value !== correctAnswers) {
       btn.classList.add('incorrect');
       btnRef.current.classList.add('correct');
+      btnRef.current.setAttribute('id', 'disabled-btn');
       setShowNextBtn(true);
       setIsCorrect(false);
     } else {
@@ -34052,8 +34056,6 @@ var _Buttons = _interopRequireDefault(require("../Components/Buttons"));
 
 var _ContextProvider = require("../ContextProvider");
 
-var _Questions = _interopRequireDefault(require("./Questions"));
-
 var _adventure = _interopRequireDefault(require("../images/adventure.svg"));
 
 var _Letters = _interopRequireDefault(require("../Components/Letters"));
@@ -34099,7 +34101,7 @@ function DisplayQuiz(e) {
     className: "countryName--wrapper"
   }, /*#__PURE__*/_react.default.createElement("h2", {
     className: "heading3"
-  }, country && country.name, " ", questions && questions.question1)) : /*#__PURE__*/_react.default.createElement("div", {
+  }, country && country.capital, " ", questions && questions.question1)) : /*#__PURE__*/_react.default.createElement("div", {
     className: "flag--wrapper"
   }, /*#__PURE__*/_react.default.createElement("img", {
     src: country && country.flag
@@ -34126,7 +34128,7 @@ function DisplayQuiz(e) {
 
 var _default = DisplayQuiz;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../Components/Buttons":"Components/Buttons.js","../ContextProvider":"ContextProvider.js","./Questions":"Components/Questions.js","../images/adventure.svg":"images/adventure.svg","../Components/Letters":"Components/Letters.js"}],"Components/Footer.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../Components/Buttons":"Components/Buttons.js","../ContextProvider":"ContextProvider.js","../images/adventure.svg":"images/adventure.svg","../Components/Letters":"Components/Letters.js"}],"Components/Footer.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34328,7 +34330,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63718" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56585" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

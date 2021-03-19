@@ -1,7 +1,6 @@
 import React, {useContext} from 'react';
 import Button  from '../Components/Buttons';
 import { Context } from '../ContextProvider';
-import Questions from './Questions';
 import andventure from '../images/adventure.svg';
 import Letters from '../Components/Letters';
 
@@ -30,7 +29,7 @@ function DisplayQuiz(e) {
       <div className="contents--wrapper">
         { questions && questions.question1
           ? <div className="countryName--wrapper">
-              <h2 className="heading3">{country && country.name} {questions && questions.question1}</h2>
+              <h2 className="heading3">{country && country.capital} {questions && questions.question1}</h2>
             </div>
           : <div  className="flag--wrapper">
              <img src={country && country.flag}/>

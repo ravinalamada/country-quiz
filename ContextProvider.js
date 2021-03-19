@@ -24,6 +24,7 @@ function ContextProvider({children}) {
     const randomAnswers = [randomQuiz.name, opt1.name, opt2.name, opt3.name];
     randomAnswers.sort(() => {return 0.5 - Math.random() })
     const randomQuestions = Questions[Math.floor(Math.random() * Questions.length)]
+
     //Initialized the quizData that will be used later
     const quizObj = {
       country: randomQuiz,
@@ -44,6 +45,9 @@ function ContextProvider({children}) {
   function handleClick(e) {
     // Grab the button that is clicked
      const btn = e.currentTarget;
+     const buttonsArr = Array.from(document.querySelectorAll('button.btn'));
+     buttonsArr.map(button => button.classList.add('disabled'))
+
     // Find the correct answers
     const correctAnswers = quizesData.answers;
 
@@ -52,10 +56,12 @@ function ContextProvider({children}) {
       setIsCorrect(true);
       setShowNextBtn(true);
       setScore(prev => prev + 1);
+      btnRef.current.setAttribute('id', 'disabled-correct-btn');
     }
     else if(btn.value !== correctAnswers) {
       btn.classList.add('incorrect')
       btnRef.current.classList.add('correct');
+      btnRef.current.setAttribute('id', 'disabled-btn');
       setShowNextBtn(true);
       setIsCorrect(false)
     }
