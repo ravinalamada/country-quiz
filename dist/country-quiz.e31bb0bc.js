@@ -34107,7 +34107,7 @@ function DisplayQuiz(e) {
     src: country && country.flag
   }), /*#__PURE__*/_react.default.createElement("h3", {
     className: "heading3"
-  }, questions && questions.question2))), /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
+  }, questions && questions.question2))), /*#__PURE__*/_react.default.createElement("div", {
     className: "btn--wrapper"
   }, answerOptions && answerOptions.map((opt, i) => /*#__PURE__*/_react.default.createElement("button", {
     key: opt,
@@ -34119,7 +34119,7 @@ function DisplayQuiz(e) {
     className: "letter"
   }, mappedLetters[i]), /*#__PURE__*/_react.default.createElement("span", {
     className: "answers"
-  }, opt))))), showNextBtn && /*#__PURE__*/_react.default.createElement(_Buttons.default, {
+  }, opt)))), showNextBtn && /*#__PURE__*/_react.default.createElement(_Buttons.default, {
     handleShowResult: handleShowResult,
     handleNextBtn: handleNextBtn,
     value: correctAnswers
@@ -34330,7 +34330,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56585" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53088" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

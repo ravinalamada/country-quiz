@@ -37,19 +37,17 @@ function DisplayQuiz(e) {
             </div>
         }
       </div>
-      <div>
-        <div className="btn--wrapper">
-          {answerOptions && answerOptions.map((opt, i) => (
-            <button key={opt}
-                    className="btn"
-                    value={opt}
-                    onClick={handleClick}
-                    ref={correctAnswers === opt ? btnRef : null}>
-              <span className="letter">{mappedLetters[i]}</span>
-              <span className="answers">{opt}</span>
-            </button>
-          ))}
-        </div>
+      <div className="btn--wrapper">
+        {answerOptions && answerOptions.map((opt, i) => (
+          <button key={opt}
+                  className="btn"
+                  value={opt}
+                  onClick={handleClick}
+                  ref={correctAnswers === opt ? btnRef : null}>
+            <span className="letter">{mappedLetters[i]}</span>
+            <span className="answers">{opt}</span>
+          </button>
+        ))}
       </div>
       {showNextBtn && <Button
         handleShowResult={handleShowResult}
