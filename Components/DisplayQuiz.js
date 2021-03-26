@@ -31,8 +31,8 @@ function DisplayQuiz(e) {
           ? <div className="countryName--wrapper">
               <h2 className="heading3">{country && country.capital} {questions && questions.question1}</h2>
             </div>
-          : <div  className="flag--wrapper">
-             <img src={country && country.flag}/>
+          : <div  className="questions--wrapper">
+             <img className="flag-image" src={country && country.flag}/>
              <h3 className="heading3">{questions && questions.question2}</h3>
             </div>
         }

@@ -34102,8 +34102,9 @@ function DisplayQuiz(e) {
   }, /*#__PURE__*/_react.default.createElement("h2", {
     className: "heading3"
   }, country && country.capital, " ", questions && questions.question1)) : /*#__PURE__*/_react.default.createElement("div", {
-    className: "flag--wrapper"
+    className: "questions--wrapper"
   }, /*#__PURE__*/_react.default.createElement("img", {
+    className: "flag-image",
     src: country && country.flag
   }), /*#__PURE__*/_react.default.createElement("h3", {
     className: "heading3"
@@ -34330,7 +34331,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53245" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57985" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
