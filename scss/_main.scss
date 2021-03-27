@@ -2,6 +2,7 @@
   max-width: 464px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 20px;
 }
 
 main {
@@ -32,6 +33,7 @@ main {
 
 .results {
   max-height: 542px;
+  padding-top: 0;
 }
 
 .results,
@@ -139,12 +141,10 @@ main {
   flex-direction: column;
   align-items: center;
 
-  &__btn--wrapper {
-    margin-top: 71px;
-  }
-
   &--img {
     width: 100%;
+    height: 128.58px;
+    margin-top: 49.02px;
   }
 
   &__heading {
@@ -155,6 +155,7 @@ main {
     line-height: 72px;
     color: #1D355D;
     margin-bottom: 0;
+    margin-top: 72.39px;
   }
 
   &--desc {
@@ -164,26 +165,27 @@ main {
     font-size: 18px;
     line-height: 27px;
     color: #1D355D;
+    margin-block-start: 11px;
+    margin-block-end: 10px;
   }
 
   &--score {
-    font-size: 40px;
+    font-size: 37.33px;
     font-weight: 700;
-    color: green;
+    color: lightgreen;
   }
 
   &__btn {
     background-color: white;
     border-radius: 12px;
-    padding-top: 18px;
-    padding-left: 61px;
-    padding-right: 61px;
-    padding-bottom: 17px;
+    width: 209px;
+    height: 62px;
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
     line-height: 27px;
     color: #1D355D;
+    margin-top: 71px;
   }
 }
 
