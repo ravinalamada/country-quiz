@@ -198,10 +198,11 @@ main {
   background-position: 98%;
   padding-right: 16px;
   color: white;
+  border-color: transparent;
 }
 
 .correct {
-  background-color: #81C784;
+  background-color: #60BF88;
   background-image: url('../images/checked-icon.svg');
   background-size: 20px;
 }
@@ -209,14 +210,16 @@ main {
 .incorrect,
 .incorrect:disabled:hover,
 #disabled-btn:hover {
-  background-color: #FF8A65;
+  background-color: #EA8282;
   background-image: url('../images/close-icon.svg');
   background-size: 20px;
   background-repeat: no-repeat;
+  border-color: transparent;
 }
 
 #disabled-correct-btn:hover {
-  background-color: #81C784;
+  background-color: #60BF88;
+  border-color: transparent;
 }
 
 .disabled {
