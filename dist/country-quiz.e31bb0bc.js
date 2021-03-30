@@ -34129,29 +34129,7 @@ function DisplayQuiz(e) {
 
 var _default = DisplayQuiz;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","../Components/Buttons":"Components/Buttons.js","../ContextProvider":"ContextProvider.js","../images/adventure.svg":"images/adventure.svg","../Components/Letters":"Components/Letters.js"}],"Components/Footer.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function Footer() {
-  return /*#__PURE__*/_react.default.createElement("footer", {
-    className: "footer"
-  }, /*#__PURE__*/_react.default.createElement("p", {
-    className: "footer--desc"
-  }, "Prisca@ DevChallenges.io"));
-}
-
-var _default = Footer;
-exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"images/reward.svg":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../Components/Buttons":"Components/Buttons.js","../ContextProvider":"ContextProvider.js","../images/adventure.svg":"images/adventure.svg","../Components/Letters":"Components/Letters.js"}],"images/reward.svg":[function(require,module,exports) {
 module.exports = "/reward.e69d7be0.svg";
 },{}],"Components/Result.js":[function(require,module,exports) {
 "use strict";
@@ -34213,8 +34191,6 @@ var _reactRouterDom = require("react-router-dom");
 
 var _DisplayQuiz = _interopRequireDefault(require("./DisplayQuiz"));
 
-var _Footer = _interopRequireDefault(require("../Components/Footer"));
-
 var _Result = _interopRequireDefault(require("../Components/Result"));
 
 var _ContextProvider = require("../ContextProvider");
@@ -34238,12 +34214,12 @@ function Main() {
   }, /*#__PURE__*/_react.default.createElement(_Result.default, {
     handleGoBackToHome: handleGoBackToHome,
     score: score
-  }))), /*#__PURE__*/_react.default.createElement(_Footer.default, null));
+  }))));
 }
 
 var _default = Main;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./DisplayQuiz":"Components/DisplayQuiz.js","../Components/Footer":"Components/Footer.js","../Components/Result":"Components/Result.js","../ContextProvider":"ContextProvider.js"}],"Components/Header.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./DisplayQuiz":"Components/DisplayQuiz.js","../Components/Result":"Components/Result.js","../ContextProvider":"ContextProvider.js"}],"Components/Header.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34331,7 +34307,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49724" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51006" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
